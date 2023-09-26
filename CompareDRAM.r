@@ -4,6 +4,7 @@
  #Load tidyverse
 library(tidyverse)
 library(lubridate)
+library(scales)
 #Load dataset in
 BeerData = read.csv(file = "DRAMSHOPDATA.csv", header = TRUE)
 
@@ -23,20 +24,30 @@ Central_Data <- BeerData %>%
 
 Central_aggregated <- Central_Data %>%
   group_by(year) %>%
-  summarise(net_sales_for_year = sum(net_sales) / n())
-
+  summarise(net_sales_for_year = sum(net_sales))
+ 
 Front_aggregated <- Front_St %>%
   group_by(year) %>%
-  summarise(net_sales_for_year = sum(net_sales) / n())
+  summarise(net_sales_for_year = sum(net_sales))
 
+# Combine the data for plotting
+combined_data <- bind_rows(
+  mutate(Central_aggregated, Location = "Central"),
+  mutate(Front_aggregated, Location = "Front St.")
+)
 
+# Plot side-by-side bar graphs with Y-axis labels in accounting format
+ggplot(combined_data, aes(x = factor(year), y = net_sales_for_year, fill = Location)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  ylab("Net Sales") +
+  xlab("Year") +
+  ggtitle("Comparison of Net Sales: Front St. vs Central Locations") +
+  scale_fill_manual(name = "Location", values = c("Central" = "red", "Front St." = "blue")) +
+  scale_y_continuous(labels = scales::dollar_format(scale = 0.001, prefix = "$", suffix = "k")) +  # Y-axis labels in accounting format
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate X-axis labels for better readability
 
-#Graph the data over the years
-ggplot() +
-    geom_line(data = Central_aggregated, aes(x = year, y = net_sales_for_year, color = "Front St."), size = 1) +
-    geom_line(data = Front_aggregated, aes(x = year, y = net_sales_for_year, color = "Central"), size = 1) +
-    ylab("Sales") +
-    xlab("Year") +
-    ggtitle("Lifelong Comparison of Net Sales for Front and Central Locations") +
-    scale_color_manual(name = "Location", values = c("Front St." = "blue", "Central" = "red")) +
-    theme_minimal()
+ggsave(
+    "assets\\Plot4_DRAM.jpeg",
+    plot = last_plot()
+    )
