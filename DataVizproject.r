@@ -49,7 +49,7 @@ ggplot(data = top_20_make_models, aes(x = count, y = reorder(combined_label, cou
   ylab("Make - Model") +
   xlab("Count") +
   ggtitle("Top 20 listings by Make and Model") +
-  theme(axis.text.y = element_text(size = 8, hjust = 0)) +
+  theme(axis.text.y = element_text(size = 15, hjust = 0)) +
   guides(fill = FALSE)
   ggsave(
     "assets\\Plot1_CarData.jpeg",
