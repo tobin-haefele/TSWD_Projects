@@ -5,30 +5,10 @@ library(tidyverse)
 #Load data
 cdata = read.csv("Dashboard\\listing-data.csv")
 
-<<<<<<< HEAD
 # Load data and clean out empty make and price values
 cdata <- read.csv("Dashboard/listing-data.csv")
 cdata <- cdata %>% filter(make != "" & price != "" & time_posted != "" & model != "")
-=======
-#display column names
-names(cdata)
-#remove rows with missing price
-cdata = cdata %>% filter(!is.na(price))
-#select columns for price and time posted
-cdata_filtered = cdata %>% select(price, time_posted)
->>>>>>> parent of 828658b (Halfway)
 
-#convert time_posted to date format and group by date
-cdata_filtered$time_posted = as.Date(cdata_filtered$time_posted)
-head(cdata_filtered)
-cdata_filtered = cdata_filtered %>% group_by(time_posted) %>% summarise(price = median(price))
-
-head(cdata_filtered)
-
-#graph of price vs date over past 30 days
-ggplot(cdata_filtered, aes(x = time_posted, y = price)) + geom_line() + geom_point() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x = "Date", y = "Price", title = "Price vs Date over past 30 days")
-
-<<<<<<< HEAD
 # Define UI
 ui <- dashboardPage(
   dashboardHeader(title = "Kelly Blue Book"),
@@ -56,10 +36,15 @@ ui <- dashboardPage(
                   plotOutput("plot2", height = 400)
                 ),
                 box(
-                  title = "Median Price Over Time for Selected Make",
+                  title = "Select Make",
                   uiOutput("make_ui"),
-                  plotOutput("plot3", height = 500)
+                  plotOutput("plot3", height = 400)
+                ),
+                box(
+                  title = "Top 10 Most Popular Locations",
+                  tableOutput("table1")
                 )
+                
 
               )
       ),
@@ -72,7 +57,7 @@ ui <- dashboardPage(
 )
 
 # Define server logic
-server <- function(input, output,session) {
+server <- function(input, output, session) {
   set.seed(122)
   histdata <- rnorm(500)
   
@@ -108,14 +93,14 @@ server <- function(input, output,session) {
       head(10) %>% 
       ggplot(aes(x = reorder(paste(make, model, sep = " - "), count), y = count, fill = make))  +
       geom_bar(stat = "identity") +
-      labs(x = "Model - Make", y = "Number of Posts", title = "Top 10 Most Popular Models by Make") +      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+      labs(x = "Model - Make", y = "Number of Posts", title = "Top 10 Most Popular Models by Make") +   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
       theme(plot.title = element_text(hjust = 0.5))
   
   })
   output$text1 <- renderText({
     # Key insights
-    "The median price of posted cars has been steady over the past quarter with a dip in mid-August. The top 10 most popular makes are Toyota, Honda, Ford, Chevrolet, Nissan, Hyundai, Jeep, Kia, Dodge, and Volkswagen."
+    "This dashboard provides an a quarterly overview of the used car market based on listings collected from Craigslist. Included are the median price of all cars over time, the top 10 most popular makes and models, and top 10 most popular locations based on number of posts in the past quarter."
   })
   output$make_ui <- renderUI({
     # Dropdown menu for selecting make based on top 10 most popular makes
@@ -130,32 +115,28 @@ server <- function(input, output,session) {
   output$plot3 <- renderPlot({
     req(input$make_ui)  # Ensure input$make is available
     
-    # Line graph of median price for the selected make over time
-    cprice_filtered <- cdata %>%
-      select(price, time_posted, make) %>%
-      mutate(time_posted = as.Date(time_posted)) %>%
-      filter(price < 1000000 & price > 0) %>%
-      group_by(time_posted, make) %>%
-      summarise(median_price = median(price))
-    
-    max_date <- max(cprice_filtered$time_posted)
-    
-    cprice_filtered <- cprice_filtered %>%
-      filter(time_posted >= max_date - 91, make == input$make_ui)
-    
-    ggplot(cprice_filtered, aes(x = time_posted, y = median_price)) +
-      geom_line() +
-      geom_smooth(method = "lm", se = FALSE) +
-      geom_point() +
-      scale_x_date(date_breaks = "1 week", date_labels = "%m/%d/%Y") +
-      scale_y_continuous(labels = scales::dollar) +
-      labs(x = "Date", y = "Median Price", title = paste("Median Price Over Last Quarter for", input$make_ui)) +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    # histogram of number of posts by year of car listed
+    cdata %>%
+      select(year) %>%
+      group_by(year) %>%
+      summarise(count = n()) %>%
+      filter(year >= 1980) %>%
+      ggplot(aes(x = year,fill = ..count..)) +
+      geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+      labs(x = "Year", y = "Number of Posts") +
       theme(plot.title = element_text(hjust = 0.5))
+    
+  })
+  #table of top 10 most popular locations based on percentage of posts
+  output$table1 <- renderTable({
+    cdata %>% 
+      select(location) %>% 
+      group_by(location) %>% 
+      summarise(count = n()) %>% 
+      mutate(percentage = 100 * count / sum(count)) %>% 
+      arrange(desc(percentage)) %>% 
+      head(10)
   })
 }
-
 # Run the Shiny app
 shinyApp(ui, server)
-=======
->>>>>>> parent of 828658b (Halfway)
