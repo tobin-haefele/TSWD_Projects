@@ -13,7 +13,7 @@ cdata <- cdata %>% filter(make != "" & price != "" & time_posted != "" & model !
 ui <- dashboardPage(
   dashboardHeader(title = "Kelly Blue Book"),
   dashboardSidebar(
-    sidebarMenu(
+    sidebarMenu(\
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Widgets", tabName = "widgets", icon = icon("th"))
     )
@@ -28,21 +28,16 @@ ui <- dashboardPage(
                   plotOutput("plot1", height = 250)
                 ),
                 box(
-                  title = "Key Insights",
-                  textOutput("text1")
-                ),
-                box(
                   title = "Top 10 Most Popular Makes",
                   plotOutput("plot2", height = 400)
                 ),
                 box(
-                  title = "Select Make",
-                  uiOutput("make_ui"),
-                  plotOutput("plot3", height = 400)
-                ),
-                box(
                   title = "Top 10 Most Popular Locations",
                   tableOutput("table1")
+                ),
+                box(
+                  title = "Age of Cars Posted",
+                  plotOutput("plot3", height = 400)
                 )
                 
 
@@ -91,41 +86,30 @@ server <- function(input, output, session) {
       summarise(count = n()) %>% 
       arrange(desc(count)) %>% 
       head(10) %>% 
-      ggplot(aes(x = reorder(paste(make, model, sep = " - "), count), y = count, fill = make))  +
+      ggplot(aes(x = reorder(paste(make, model, sep = " - "), count), y = count, fill = count))  +
       geom_bar(stat = "identity") +
-      labs(x = "Model - Make", y = "Number of Posts", title = "Top 10 Most Popular Models by Make") +   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+      scale_fill_gradient(low = "lightblue", high = "darkblue") +
+      labs(x = "Model - Make", y = "Number of Posts", title = "Top 10 Most Popular Models by Make") +  
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
       theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
       theme(plot.title = element_text(hjust = 0.5))
-  
   })
   output$text1 <- renderText({
     # Key insights
     "This dashboard provides an a quarterly overview of the used car market based on listings collected from Craigslist. Included are the median price of all cars over time, the top 10 most popular makes and models, and top 10 most popular locations based on number of posts in the past quarter."
-  })
-  output$make_ui <- renderUI({
-    # Dropdown menu for selecting make based on top 10 most popular makes
-    selectInput("make", "Select Make", choices = c("Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "Hyundai", "Jeep", "Kia", "Dodge", "Volkswagen"))
-  })
-  # Set a default value for the selectInput
-  observe({
-    updateSelectInput(session, "make", selected = "Toyota")
-  })
-  
+  }) 
   # Render the plot based on user input
   output$plot3 <- renderPlot({
-    req(input$make_ui)  # Ensure input$make is available
-    
     # histogram of number of posts by year of car listed
     cdata %>%
       select(year) %>%
       group_by(year) %>%
       summarise(count = n()) %>%
       filter(year >= 1980) %>%
-      ggplot(aes(x = year,fill = ..count..)) +
-      geom_histogram(binwidth = 1, fill = "blue", color = "black") +
+      ggplot(aes(x = year, y = count, fill = count)) +
+      geom_bar(stat = "identity", width = 0.7, position = "dodge") +
       labs(x = "Year", y = "Number of Posts") +
       theme(plot.title = element_text(hjust = 0.5))
-    
   })
   #table of top 10 most popular locations based on percentage of posts
   output$table1 <- renderTable({
