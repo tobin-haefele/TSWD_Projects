@@ -1,0 +1,140 @@
+---
+title : "Unhoused Funding Data Report"
+author : "Tobin Haefele"
+output:
+  html_document:
+    toc: true
+---
+## Executive summary
+
+Insert executive summary here
+
+## Introduction
+
+The housing solutions fund is a fund that is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing.
+
+## Housing solutions fund utilization and funding sources
+
+### Analyzing the utilization of the housing solutions fund by prevention or currently homeless
+
+
+```{r setup, echo=FALSE} 
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+  
+```{r library, echo=FALSE, results='hide', message=FALSE}
+
+# Load libraries
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(scales)
+library(rmarkdown)
+library(knitr)
+
+#load data
+X20231122_solutions_fund <- read.csv("C:/Users/thaef/OneDrive/Documents/GitHub/TSWD_Projects/Missoula_Unhoused/20231122-solutions-fund.csv")
+
+
+```
+
+
+```{r, echo=FALSE, results='hide'}
+
+#load data
+solutions_fund <- X20231122_solutions_fund
+
+#check data
+head(solutions_fund)
+
+#check data types
+str(solutions_fund)
+
+#summary statistics
+summary(solutions_fund)
+
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+# Calculate Total.paid and Percent.of.Total
+summary_data <- solutions_fund %>%
+  group_by(Prevention.or.Literally.Homeless) %>%
+  summarize(Total.paid = sum(Total.paid)) %>%
+  mutate(Percent.of.Total = Total.paid / sum(Total.paid)) %>%
+  mutate(Percent.of.Total = scales::percent(Percent.of.Total))
+  print(summary_data)
+
+
+# Create the pie chart with custom legend labels
+ggplot(summary_data, aes(x = "", y = `Total.paid`, fill = Prevention.or.Literally.Homeless)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  labs(x = NULL, y = NULL, fill = "Prevention or Currently Homeless",
+       title = "Allocation of Funds based on prevention or those currently homeless") +
+  geom_text(aes(label = Percent.of.Total), position = position_stack(vjust = 0.5), size = 10)  +
+  theme_void() +
+  scale_fill_manual(labels = c("Currently Homeless", "Prevention"),
+                    values = c("blue", "red")) +  # Set your custom legend labels and colors
+  theme(legend.position = "right")
+
+
+
+```
+
+
+### Evaluating the sources of funding and their impact on services provided
+
+
+```{r, echo=FALSE, results='hide'}
+
+# Load csv  file
+df <- X20231122_solutions_fund
+
+head(df)
+
+#unique funding sources
+unique(df$`Funding.Source`)
+
+#convert to numeric
+df$Total.paid <- as.numeric(gsub("[\\$,]", "", df$Total.paid))
+
+# Calculate average spend per unique HMIS (patient number)
+average_spend_per_HMIS <- df %>% 
+  group_by(HMIS..) %>%
+  summarise(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
+  arrange(desc(AveragePaid))
+
+# Group by Funding.Source and summarize
+average_spend_per_HMIS_by_source <- average_spend_per_HMIS %>% 
+  left_join(df, by = "HMIS..") %>%
+  group_by(`Funding.Source`) %>%
+  summarise(AveragePaidBySource = mean(AveragePaid, na.rm = TRUE))
+
+# Convert Funding.Source to ordered factor by AveragePaidBySource
+average_spend_per_HMIS_by_source$`Funding.Source` <- factor(average_spend_per_HMIS_by_source$Funding.Source,
+                                                            levels = average_spend_per_HMIS_by_source$Funding.Source[order(average_spend_per_HMIS_by_source$AveragePaidBySource, decreasing = TRUE)])
+
+# Create a color scale based on the AveragePaidBySource values
+color_scale <- scales::viridis_pal(option = "D")(length(unique(average_spend_per_HMIS_by_source$AveragePaidBySource)))
+
+# Create the bar plot
+ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePaidBySource, fill = AveragePaidBySource)) +
+  geom_bar(stat = "identity") +
+  scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)]) +
+  labs(title = "Average Spend by Funding Source",
+       x = "Funding Source",
+       y = "Average Spend") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+
+```
+
+### Comparing demographics of those who are receiving funding to the overall population of those who are unhoused
+
+Demographics of the people receiving funding compared to the overall MCES population
+
+## Conclusion
+
+insert conclusion
