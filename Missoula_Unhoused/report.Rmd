@@ -5,18 +5,19 @@ output:
   html_document:
     toc: true
 ---
-## Executive summary
-
-Insert executive summary here
-
 ## Introduction
 
-The housing solutions fund is a fund that is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing. The fund is used to help those who are currently homeless or at risk of becoming homeless. The fund is used to help pay for rent, utilities, and other expenses that may be a barrier to housing.
+In this report we partnered with the city of Missoula's "Community Planning, Development, and Innovation" (CPDI) department, specifically with the Community Development Division. In an effort to understand and monitor Missoula's unhoused population the CPDI department joined the Homeless Management Information System (HMIS) data collection effort by establishing a coordinated entry system. This allowed them to build datasets that can tell us much about the unhoused population. Along with this they have also executed a survey of the unhoused population to provide further data for us. Thanks to their hard work we have data to analyze and report on.
 
-## Housing solutions fund utilization and funding sources
+## Executive summary
 
-### Analyzing the utilization of the housing solutions fund by prevention or currently homeless
+The purpose of this report is to analyze the data provided by the CPDI department and provide a report on the findings. The report concluded with the following findings:
 
+* Total amount spent, prevention vs currently homeless
+
+* Funding sources and distribution of funding
+
+* Demographics
 
 ```{r setup, echo=FALSE} 
 knitr::opts_chunk$set(echo = FALSE)
@@ -39,6 +40,10 @@ X20231122_solutions_fund <- read.csv("C:/Users/thaef/OneDrive/Documents/GitHub/T
 
 ```
 
+### Analyzing the utilization of the housing solutions fund by prevention or currently homeless
+Our first analysis is how the housing solutions fund is being utilized to help the unhoused population. We will look at the total amounnt of money spent on prevention and the total amount spent on those who are currently homeless. Along with this we also want to look at what the funding is being used for and how much is being used in each category.
+
+Initial analysis of the housing solutions fund found that a total of $193,628 was put towards either prevention or assistance to those currently unhoused. Of this total around 77% of the funding is being used for prevention of homelessness compared to 23% being allocated for those who are currently homeless. This disparity could be explained by the fact that it is much cheaper to prevent homelessness than it is to assist those who are currently homeless. This also aligns with the CPDI's goal of preventing homelessness before it happens.
 
 ```{r, echo=FALSE, results='hide'}
 
@@ -63,28 +68,89 @@ summary_data <- solutions_fund %>%
   summarize(Total.paid = sum(Total.paid)) %>%
   mutate(Percent.of.Total = Total.paid / sum(Total.paid)) %>%
   mutate(Percent.of.Total = scales::percent(Percent.of.Total))
-  print(summary_data)
+print(summary_data)
+print(sum(summary_data$Total.paid))
 
 
-# Create the pie chart with custom legend labels
-ggplot(summary_data, aes(x = "", y = `Total.paid`, fill = Prevention.or.Literally.Homeless)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar("y", start = 0) +
-  labs(x = NULL, y = NULL, fill = "Prevention or Currently Homeless",
-       title = "Allocation of Funds based on prevention or those currently homeless") +
-  geom_text(aes(label = Percent.of.Total), position = position_stack(vjust = 0.5), size = 10)  +
-  theme_void() +
-  scale_fill_manual(labels = c("Currently Homeless", "Prevention"),
-                    values = c("blue", "red")) +  # Set your custom legend labels and colors
-  theme(legend.position = "right")
+# Create the bar chart with custom legend labels
+ggplot(summary_data, aes(x = Prevention.or.Literally.Homeless, y = Total.paid, fill = Prevention.or.Literally.Homeless)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Majority of funding is spent on prevention of homelessness",
+       x = "Prevention or Literally Homeless",
+       y = "Total Paid") +
+  scale_fill_discrete(name = "Prevention or Literally Homeless",
+                      labels = c("Prevention" = "Prevention",
+                                 "Literally Homeless" = "Literally Homeless"))
 
 
 
 ```
 
+Secondary analysis
+
+```{r, echo=FALSE, results='hide'}
+#load data
+solutions_fund <- X20231122_solutions_fund
+
+#check data
+head(solutions_fund)
+
+#check data types
+str(solutions_fund)
+
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+library(stringr)
+
+# Define categories and their respective regex patterns
+categories <- c("Rent", "Utilities", "Applications", "Deposits", "Transportation")
+
+# Define regex patterns for each category
+patterns <- c(
+  "(?i)rent",
+  "(?i)utilities|electricity",
+  "(?i)applications|apply",
+  "(?i)deposits",
+  "(?i)transportation|bus|taxi"
+)
+
+# Function to categorize based on patterns
+categorize_category <- function(what_for) {
+  for (i in seq_along(patterns)) {
+    if (str_detect(what_for, patterns[i])) {
+      return(categories[i])
+    }
+  }
+  return("Other")
+}
+
+# Create a new column 'Category' based on similar words and patterns
+solutions_fund <- solutions_fund %>%
+  mutate(Category = sapply(What.for., categorize_category))
+
+tail(solutions_fund)
+#calculate the total paid by What for
+total_paid_by_what_for <- solutions_fund %>%
+  group_by(Category) %>%
+  summarize(Total.paid = sum(Total.paid)) %>%
+  mutate(Percent.of.Total = Total.paid / sum(Total.paid)) %>%
+  mutate(Percent.of.Total = scales::percent(Percent.of.Total))
+  
+print(total_paid_by_what_for)
+
+# Create the bar chart with custom legend labels
+ggplot(total_paid_by_what_for, aes(x = Category, y = Total.paid, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Majority of funding is spent on prevention of homelessness",
+       x = "What for",
+       y = "Total Paid") +
+  scale_fill_discrete(name = "What for",
+                      labels = c("Prevention" = "Prevention",
+                                 "Literally Homeless" = "Literally Homeless"))
+```
 
 ### Evaluating the sources of funding and their impact on services provided
-
 
 ```{r, echo=FALSE, results='hide'}
 
