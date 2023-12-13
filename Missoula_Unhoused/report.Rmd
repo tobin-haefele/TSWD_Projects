@@ -108,11 +108,11 @@ categories <- c("Rent", "Utilities", "Applications", "Deposits", "Transportation
 
 # Define regex patterns for each category
 patterns <- c(
-  "(?i)rent",
-  "(?i)utilities|electricity",
-  "(?i)applications|apply",
-  "(?i)deposits",
-  "(?i)transportation|bus|taxi"
+  "(?i)\\brent\\b",  # Matches "rent" as a whole word
+  "(?i)utility|electricity|water",  # Includes common utilities
+  "(?i)applications|apply|fee|fees",  # Matches application-related terms
+  "(?i)deposit",  # Matches terms related to deposits
+  "(?i)transportation|bus|taxi|gas"  # Matches transportation-related terms
 )
 
 # Function to categorize based on patterns
@@ -129,15 +129,21 @@ categorize_category <- function(what_for) {
 solutions_fund <- solutions_fund %>%
   mutate(Category = sapply(What.for., categorize_category))
 
-tail(solutions_fund)
+# Display the result
+head(solutions_fund)
+
 #calculate the total paid by What for
 total_paid_by_what_for <- solutions_fund %>%
   group_by(Category) %>%
   summarize(Total.paid = sum(Total.paid)) %>%
   mutate(Percent.of.Total = Total.paid / sum(Total.paid)) %>%
-  mutate(Percent.of.Total = scales::percent(Percent.of.Total))
+  mutate(Percent.of.Total = scales::percent(Percent.of.Total)) %>%
+  arrange(desc(Total.paid))
   
 print(total_paid_by_what_for)
+
+total_paid_by_what_for$Category <- factor(total_paid_by_what_for$Category, levels = total_paid_by_what_for$Category)
+
 
 # Create the bar chart with custom legend labels
 ggplot(total_paid_by_what_for, aes(x = Category, y = Total.paid, fill = Category)) +
@@ -148,6 +154,10 @@ ggplot(total_paid_by_what_for, aes(x = Category, y = Total.paid, fill = Category
   scale_fill_discrete(name = "What for",
                       labels = c("Prevention" = "Prevention",
                                  "Literally Homeless" = "Literally Homeless"))
+
+#print table of total paid by What for
+print(total_paid_by_what_for)
+
 ```
 
 ### Evaluating the sources of funding and their impact on services provided
@@ -192,15 +202,172 @@ ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePa
        x = "Funding Source",
        y = "Average Spend") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+  
+```{r, echo=FALSE, results='hide', message=FALSE}
+# Group by Funding Source and Category, calculate total paid and percentage
+total_paid_by_what_for_by_source <- solutions_fund %>%
+  group_by(Funding.Source, Category) %>%
+  summarize(Total.paid = sum(Total.paid)) %>%
+  mutate(Percent.of.Total = Total.paid / sum(Total.paid))
 
+# Arrange by Total Paid within each Category within each Funding Source
+total_paid_by_what_for_by_source <- total_paid_by_what_for_by_source %>%
+  arrange(Funding.Source, desc(Total.paid))
 
+# Convert Funding.Source to a factor, sorting levels by Total Paid
+total_paid_by_what_for_by_source$Funding.Source <- factor(
+  total_paid_by_what_for_by_source$Funding.Source, 
+  levels = unique(total_paid_by_what_for_by_source$Funding.Source[order(-total_paid_by_what_for_by_source$Total.paid)])
+)
 
+# Plot the stacked bar chart
+ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.Total, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Percentage of funding spent on different categories by source",
+       x = "Funding Source",
+       y = "Percentage of Total") +
+  scale_fill_discrete(name = "What for",
+                      labels = c("Prevention" = "Prevention",
+                                 "Literally Homeless" = "Literally Homeless")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_y_continuous(labels = scales::percent) 
+```
+  
+```{r, echo=FALSE, results='hide', message=FALSE}
+### Funding by source and referral from
+library(plotrix)
+library(ggplot2)
+
+#import data
+solutions_fund <- X20231122_solutions_fund
+
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+#remove any spaces in the referral from column
+solutions_fund$Referral.from <- gsub(" ", "", solutions_fund$Referral.from)
+
+#convert all referral from to upper case
+solutions_fund$Referral.from <- toupper(solutions_fund$Referral.from)
+unique(solutions_fund$Referral.from)
+
+# Calculate the total paid for each Referral from
+total_paid_by_referral <- solutions_fund %>%
+  group_by(Referral.from) %>%
+  summarize(TotalPaid = sum(Total.paid)) %>%
+  arrange(desc(TotalPaid))
+
+# Select the top 5 referral forms based on total paid
+top_5_referral_forms <- total_paid_by_referral %>%
+  top_n(5, TotalPaid) %>%
+  pull(Referral.from)
+
+# Filter the data to retain only the top 5 referral forms
+filtered_data <- solutions_fund %>%
+  filter(Referral.from %in% top_5_referral_forms)
+
+# Create a bubble chart
+ggplot(filtered_data, aes(x = Funding.Source, y = Referral.from, size = Total.paid, color = Referral.from)) +
+  geom_point(alpha = 0.6) +
+  scale_size(range = c(3, 15)) +
+  labs(title = "Top 5 Referral Forms by Funding Source and Total Paid",
+       x = "Funding Source",
+       y = "Referral from",
+       size = "Total Paid",
+       color = "Referral from") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ### Comparing demographics of those who are receiving funding to the overall population of those who are unhoused
+```{r, echo=FALSE}
+#load data
+solutions_fund <- X20231122_solutions_fund
 
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+#remove spaces
+solutions_fund$Race <- gsub(" ", "", solutions_fund$Race)
+
+# Consolidate categories for Race
+solutions_fund <- solutions_fund %>%
+  mutate(Race_Consolidated = case_when(
+    Race %in% c("White") ~ "White",
+    Race %in% c("NativeAmerican", "NativeAmerican/White") ~ "Native American",
+    grepl("Black", Race) ~ "Black/African America", # Combine anything containing 'Black'
+    Race %in% c("PacificIslander", "AsianAmerican/White") ~ "Asian American/Pacific Islander",
+    TRUE ~ "Undefined" # Any other categories not specified
+  ))
+
+
+# Filter out rows where 'Race' is not blank
+filtered_data <- solutions_fund %>%
+  filter(!is.na(Race) & Race != "")
+
+# Calculate the total paid amount across all races
+total_paid_all_races <- sum(filtered_data$Total.paid)
+
+# Group by Race_Consolidated, calculate frequency, total paid, average paid, and percent of total
+race_summary <- filtered_data %>%
+  group_by(Race_Consolidated) %>%
+  summarise(
+    Frequency = n(),
+    TotalPaid = sum(Total.paid),
+    AveragePaid = mean(Total.paid),
+    PercentTotal = (TotalPaid / total_paid_all_races) * 100
+  ) %>%
+  arrange(desc(TotalPaid))
+
+# Format columns for dollars and percentages
+race_summary$TotalPaid <- scales::dollar(race_summary$TotalPaid)
+race_summary$AveragePaid <- scales::dollar(race_summary$AveragePaid)
+race_summary$PercentTotal <- scales::percent(race_summary$PercentTotal / 100)
+
+knitr::kable(race_summary, format = "markdown")
+```
 Demographics of the people receiving funding compared to the overall MCES population
+  
+```{r, echo=FALSE}
+#analyzing the amount of money going to those new to missoula vs those who have been here for a while
 
+#load data
+solutions_fund <- X20231122_solutions_fund
+
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+#filter out rows where 6 mos in missoula is blank
+filtered_data <- solutions_fund %>%
+  filter(!is.na(X6.mos.in.Missoula...Y.N.) & X6.mos.in.Missoula...Y.N. != "")
+
+#combine rows where 6 mos in missoula is N or no
+filtered_data <- filtered_data %>%
+  mutate(X6.mos.in.Missoula...Y.N. = case_when(
+    X6.mos.in.Missoula...Y.N. %in% c("N", "No") ~ "N",
+    TRUE ~ "Y"
+  ))
+
+#GRoup average paid by 6 mos in Missoula Y/N
+average_paid_by_6_mos <- filtered_data %>%
+  group_by(X6.mos.in.Missoula...Y.N.) %>%
+  summarize(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
+  arrange(desc(AveragePaid))
+  print(average_paid_by_6_mos)
+
+# Create a color scale based on the AveragePaid values
+color_scale <- scales::viridis_pal(option = "D")(length(unique(average_paid_by_6_mos$AveragePaid)))
+
+# Create the bar plot
+ggplot(average_paid_by_6_mos, aes(x = X6.mos.in.Missoula...Y.N., y = AveragePaid, fill = AveragePaid)) +
+  geom_bar(stat = "identity") +
+  scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)]) +
+  labs(title = "Average Spend by 6 mos in Missoula Y/N",
+       x = "6 mos in Missoula Y/N",
+       y = "Average Spend") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
 ## Conclusion
 
 insert conclusion
