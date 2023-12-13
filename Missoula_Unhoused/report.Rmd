@@ -367,6 +367,8 @@ ggplot(average_paid_by_6_mos, aes(x = X6.mos.in.Missoula...Y.N., y = AveragePaid
        x = "6 mos in Missoula Y/N",
        y = "Average Spend") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+#is the difference statistically significant?
 ```
 ## Conclusion
 
