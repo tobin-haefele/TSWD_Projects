@@ -1,9 +1,11 @@
 ---
-title : "Unhoused Funding Data Report"
-author : "Tobin Haefele"
+title: "Unhoused Funding Data Report"
+author: "Tobin Haefele"
 output:
   html_document:
-    toc: true
+    toc: yes
+  word_document:
+    toc: yes
 ---
 ## Introduction
 
@@ -86,17 +88,16 @@ ggplot(summary_data, aes(x = Prevention.or.Literally.Homeless, y = Total.paid, f
 
 ```
 
-Secondary analysis
+In this section I want to take a look at funding and how much is being spent on each category. This will allow us to view what the funding is being used for and how much is being spent on each category, allowing us to see if the funding is being used in the most optimal way.
 
-```{r, echo=FALSE, results='hide'}
+Within the Prevention group we can see that the over 70% of funding is going towards rent while deposits make up around 14%. The makeup of these categories make sense as preventing eviction or helping with deposits to secure a place to live is a great way to prevent homelessness.
+
+Among those currently homeless the majority of funding is going toward deposits (28%) and transportation (23%), both of these categories support the idea of helping those who are homeless either get into a home or get somewhere they have family/friends or a better opportunity.
+
+```{r, echo=FALSE, message=FALSE}
+
 #load data
 solutions_fund <- X20231122_solutions_fund
-
-#check data
-head(solutions_fund)
-
-#check data types
-str(solutions_fund)
 
 #convert to numeric
 solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
@@ -129,48 +130,56 @@ categorize_category <- function(what_for) {
 solutions_fund <- solutions_fund %>%
   mutate(Category = sapply(What.for., categorize_category))
 
-# Display the result
-head(solutions_fund)
+# Calculate the total spent for each 'Prevention.or.Literally.Homeless' group
+total_spent_by_group <- solutions_fund %>%
+  group_by(Prevention.or.Literally.Homeless,Category) %>%
+  summarise(TotalSpent = sum(Total.paid)) %>%
+  mutate(percent_total = TotalSpent / sum(TotalSpent) * 100)
 
-#calculate the total paid by What for
-total_paid_by_what_for <- solutions_fund %>%
-  group_by(Category) %>%
-  summarize(Total.paid = sum(Total.paid)) %>%
-  mutate(Percent.of.Total = Total.paid / sum(Total.paid)) %>%
-  mutate(Percent.of.Total = scales::percent(Percent.of.Total)) %>%
-  arrange(desc(Total.paid))
-  
-print(total_paid_by_what_for)
+# Generate tables for each 'Prevention.or.Literally.Homeless' group
+prevention_table <- total_spent_by_group %>%
+  filter(Prevention.or.Literally.Homeless == "Prevention") %>%
+  arrange(desc(TotalSpent))
 
-total_paid_by_what_for$Category <- factor(total_paid_by_what_for$Category, levels = total_paid_by_what_for$Category)
+literally_homeless_table <- total_spent_by_group %>%
+  filter(Prevention.or.Literally.Homeless == "Literally Homeless") %>%
+  arrange(desc(TotalSpent)) 
 
+# Format columns for dollars and percentages
+prevention_table$TotalSpent <- scales::dollar(prevention_table$TotalSpent)
+prevention_table$percent_total <- scales::percent(prevention_table$percent_total / 100)
 
-# Create the bar chart with custom legend labels
-ggplot(total_paid_by_what_for, aes(x = Category, y = Total.paid, fill = Category)) +
+literally_homeless_table$TotalSpent <- scales::dollar(literally_homeless_table$TotalSpent)
+literally_homeless_table$percent_total <- scales::percent(literally_homeless_table$percent_total / 100)
+
+#knit the tables
+knitr::kable(prevention_table, format = "markdown")
+knitr::kable(literally_homeless_table, format = "markdown")
+
+#plot
+ggplot(total_spent_by_group, aes(x = Prevention.or.Literally.Homeless, y = percent_total, fill = Category)) +
   geom_bar(stat = "identity") +
-  labs(title = "Majority of funding is spent on prevention of homelessness",
-       x = "What for",
-       y = "Total Paid") +
-  scale_fill_discrete(name = "What for",
-                      labels = c("Prevention" = "Prevention",
-                                 "Literally Homeless" = "Literally Homeless"))
-
-#print table of total paid by What for
-print(total_paid_by_what_for)
+  labs(title = "Where the funding is being spent for prevention vs those currently homeless",
+       x = "Category",
+       y = "Percent of Total") +
+  scale_fill_discrete(name = "Type of Assistance") +
+  geom_text(aes(label = scales::percent(percent_total / 100, accuracy = 0.1)), 
+            position = position_stack(vjust = 0.5)) +  # Position the text in the middle of each stack
+  theme_minimal()
 
 ```
 
 ### Evaluating the sources of funding and their impact on services provided
 
-```{r, echo=FALSE, results='hide'}
+In this next section we will take a look at where this funding is coming in from and how much is coming from each source. Using this data we can identify which sources are being utilized the most and which are being utilized the least.
+
+Looking at the initial table we can see that just over half of the funding is coming from AHTF (Affordable Housing Trust Fund (City)) which is double the next closest source of funding OBT (Otto Bremer Trust) at 22%. Despite the EFSG (Emergency Solutions Grant (Human Resource Council program)) having a higher average spend on each individual at $762 per individual, this could be contributed to having a very small sample size of 10 individuals. The highest average spend on each individual when accounting for sample size ends up being the AHTF and WF (Wells Fargo) sources, at $559 and $529 respectively.
+
+```{r, echo=FALSE, results='hide', message=FALSE}
+```{r, echo=FALSE}
 
 # Load csv  file
 df <- X20231122_solutions_fund
-
-head(df)
-
-#unique funding sources
-unique(df$`Funding.Source`)
 
 #convert to numeric
 df$Total.paid <- as.numeric(gsub("[\\$,]", "", df$Total.paid))
@@ -187,6 +196,11 @@ average_spend_per_HMIS_by_source <- average_spend_per_HMIS %>%
   group_by(`Funding.Source`) %>%
   summarise(AveragePaidBySource = mean(AveragePaid, na.rm = TRUE))
 
+#calculate number of unique HMIS per source
+unique_HMIS_per_source <- df %>%
+  group_by(`Funding.Source`) %>%
+  summarise(Number_of_HMIS_Assisted = n_distinct(HMIS..))
+
 # Convert Funding.Source to ordered factor by AveragePaidBySource
 average_spend_per_HMIS_by_source$`Funding.Source` <- factor(average_spend_per_HMIS_by_source$Funding.Source,
                                                             levels = average_spend_per_HMIS_by_source$Funding.Source[order(average_spend_per_HMIS_by_source$AveragePaidBySource, decreasing = TRUE)])
@@ -194,16 +208,35 @@ average_spend_per_HMIS_by_source$`Funding.Source` <- factor(average_spend_per_HM
 # Create a color scale based on the AveragePaidBySource values
 color_scale <- scales::viridis_pal(option = "D")(length(unique(average_spend_per_HMIS_by_source$AveragePaidBySource)))
 
+#create table with total paid by source and the percent of total
+total_paid_by_source <- df %>%
+  group_by(`Funding.Source`) %>%
+  summarise(TotalPaid = sum(Total.paid)) %>%
+  mutate(PercentTotal = TotalPaid / sum(TotalPaid) * 100)
+
+# Merge the two tables by Funding.Source
+combined_table <- merge(total_paid_by_source, unique_HMIS_per_source, by = "Funding.Source")
+
+
+# Format columns for dollars and percentages
+combined_table$TotalPaid <- scales::dollar(combined_table$TotalPaid)
+combined_table$PercentTotal <- scales::percent(combined_table$PercentTotal / 100)
+
+#knit the table
+knitr::kable(combined_table, format = "markdown", caption = "Overall Breakdown of Where Funding is Coming From")
+
 # Create the bar plot
-ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePaidBySource, fill = AveragePaidBySource)) +
+ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePaidBySource)) +
   geom_bar(stat = "identity") +
   scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)]) +
-  labs(title = "Average Spend by Funding Source",
+  labs(title = "Average amount paid per person by Funding Source",
        x = "Funding Source",
-       y = "Average Spend") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+       y = "Average Spend ($)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-  
+
+Taking a look at the categories in which the majority of funding goes for each source also sheds some insight into the goal for each source. For example 100% of the funding from the EFSG were dedicated to Rental Assistance, 
+
 ```{r, echo=FALSE, results='hide', message=FALSE}
 # Group by Funding Source and Category, calculate total paid and percentage
 total_paid_by_what_for_by_source <- solutions_fund %>%
@@ -223,15 +256,18 @@ total_paid_by_what_for_by_source$Funding.Source <- factor(
 
 # Plot the stacked bar chart
 ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.Total, fill = Category)) +
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", position = "fill") +
   labs(title = "Percentage of funding spent on different categories by source",
        x = "Funding Source",
        y = "Percentage of Total") +
   scale_fill_discrete(name = "What for",
                       labels = c("Prevention" = "Prevention",
                                  "Literally Homeless" = "Literally Homeless")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_y_continuous(labels = scales::percent) 
+  geom_text(aes(label = scales::percent(Percent.of.Total, accuracy = 0.1)), 
+            position = position_fill(vjust = 0.5)) +  
+  theme_minimal() +
+  scale_y_continuous(labels = scales::percent_format(scale = 100))
+  
 ```
   
 ```{r, echo=FALSE, results='hide', message=FALSE}
@@ -295,10 +331,10 @@ solutions_fund$Race <- gsub(" ", "", solutions_fund$Race)
 solutions_fund <- solutions_fund %>%
   mutate(Race_Consolidated = case_when(
     Race %in% c("White") ~ "White",
-    Race %in% c("NativeAmerican", "NativeAmerican/White") ~ "Native American",
-    grepl("Black", Race) ~ "Black/African America", # Combine anything containing 'Black'
+    Race %in% c("NativeAmerican", "NativeAmerican/White", "American Indian, Alaska Native, or Indigenous") ~ "American Indian, Alaska Native, or Indigenous",
+    grepl("Black", Race) ~ "Black, African American, or African", # Retaining the Black category
     Race %in% c("PacificIslander", "AsianAmerican/White") ~ "Asian American/Pacific Islander",
-    TRUE ~ "Undefined" # Any other categories not specified
+    TRUE ~ "Multiple" # Any other categories not specified
   ))
 
 
@@ -328,6 +364,40 @@ race_summary$PercentTotal <- scales::percent(race_summary$PercentTotal / 100)
 knitr::kable(race_summary, format = "markdown")
 ```
 Demographics of the people receiving funding compared to the overall MCES population
+```{r, echo=FALSE}
+##import mces data to compare
+mces <- read.csv("C:/Users/thaef/OneDrive/Documents/GitHub/TSWD_Projects/Missoula_Unhoused/20231122-mces-data.csv")
+
+filtered_data <- mces %>%
+  mutate(
+    Race_Consolidated = case_when(
+      Race.and.Ethnicity %in% c("White") ~ "White",
+      Race.and.Ethnicity %in% c("NativeAmerican", "NativeAmerican/White", "American Indian, Alaska Native, or Indigenous") ~ "American Indian, Alaska Native, or Indigenous",
+      grepl("(?i)Black|Black, African American, or African", Race.and.Ethnicity, perl = TRUE) ~ "Black, African American, or African",
+      grepl("(?i)Asian|Pacific Islander", Race.and.Ethnicity, perl = TRUE) ~ "Asian American/Pacific Islander",
+      grepl(";", Race.and.Ethnicity) ~ "Multiple",
+      grepl("(?i)Hispanic/Latina/e/o", Race.and.Ethnicity, perl = TRUE) ~ "Hispanic/Latina/e/o",
+      TRUE ~ "Other"
+    )
+  )
+
+# Calculate the total number of entries
+total_entries <- filtered_data %>%
+  filter(Race_Consolidated != "Other") %>%
+  nrow()
+
+# Group by Race_Consolidated and calculate frequency and percent of total
+race_freq_table <- filtered_data %>%
+  filter(Race_Consolidated != "Other") %>%
+  group_by(Race_Consolidated) %>%
+  summarise(
+    Frequency = n(),
+    PercentTotal = (n() / total_entries) * 100
+  ) %>%
+  arrange(desc(Frequency))
+
+knitr::kable(race_freq_table, format = "markdown")
+```
   
 ```{r, echo=FALSE}
 #analyzing the amount of money going to those new to missoula vs those who have been here for a while
@@ -354,7 +424,6 @@ average_paid_by_6_mos <- filtered_data %>%
   group_by(X6.mos.in.Missoula...Y.N.) %>%
   summarize(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
   arrange(desc(AveragePaid))
-  print(average_paid_by_6_mos)
 
 # Create a color scale based on the AveragePaid values
 color_scale <- scales::viridis_pal(option = "D")(length(unique(average_paid_by_6_mos$AveragePaid)))
@@ -369,7 +438,9 @@ ggplot(average_paid_by_6_mos, aes(x = X6.mos.in.Missoula...Y.N., y = AveragePaid
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 #is the difference statistically significant?
+
 ```
-## Conclusion
+
+### Conclusion
 
 insert conclusion
