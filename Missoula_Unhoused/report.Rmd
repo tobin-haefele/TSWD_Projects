@@ -23,7 +23,11 @@ The purpose of this report is to analyze the data provided by the CPDI departmen
 
 ```{r setup, echo=FALSE} 
 knitr::opts_chunk$set(echo = FALSE)
-
+knitr::opts_chunk$set(
+ fig.width = 12,
+ fig.asp = 0.7,
+ out.width = "80%"
+)
 ```
   
 ```{r library, echo=FALSE, results='hide', message=FALSE}
@@ -175,8 +179,7 @@ In this next section we will take a look at where this funding is coming in from
 
 Looking at the initial table we can see that just over half of the funding is coming from AHTF (Affordable Housing Trust Fund (City)) which is double the next closest source of funding OBT (Otto Bremer Trust) at 22%. Despite the EFSG (Emergency Solutions Grant (Human Resource Council program)) having a higher average spend on each individual at $762 per individual, this could be contributed to having a very small sample size of 10 individuals. The highest average spend on each individual when accounting for sample size ends up being the AHTF and WF (Wells Fargo) sources, at $559 and $529 respectively.
 
-```{r, echo=FALSE, results='hide', message=FALSE}
-```{r, echo=FALSE}
+```{r Source Evaluation, echo=FALSE}
 
 # Load csv  file
 df <- X20231122_solutions_fund
@@ -226,16 +229,16 @@ combined_table$PercentTotal <- scales::percent(combined_table$PercentTotal / 100
 knitr::kable(combined_table, format = "markdown", caption = "Overall Breakdown of Where Funding is Coming From")
 
 # Create the bar plot
-ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePaidBySource)) +
-  geom_bar(stat = "identity") +
-  scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)]) +
+ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePaidBySource, fill = AveragePaidBySource)) +
+  geom_col() +
+  scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)], guide = "none") +
   labs(title = "Average amount paid per person by Funding Source",
        x = "Funding Source",
        y = "Average Spend ($)") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-Taking a look at the categories in which the majority of funding goes for each source also sheds some insight into the goal for each source. For example 100% of the funding from the EFSG were dedicated to Rental Assistance, 
+Taking a look at the categories in which the majority of funding goes for each source also sheds some insight into the goal for each source. Across the board rental assistance seems to be the biggest category for the majority of funding sources out there. Providence had the lowest amount ratio of funds going to rent at 33%, private donations was the next lowest at 15% and lastly Home Coalition was at 6% before their dissolution. The fact that the rest of the funding sources had over half of their funding going to rent lends support to the goal of preventing homelessness before it happens. The largest donor AHTF spent almost 80% of total donations on rent/deposits.
 
 ```{r, echo=FALSE, results='hide', message=FALSE}
 # Group by Funding Source and Category, calculate total paid and percentage
@@ -254,7 +257,8 @@ total_paid_by_what_for_by_source$Funding.Source <- factor(
   levels = unique(total_paid_by_what_for_by_source$Funding.Source[order(-total_paid_by_what_for_by_source$Total.paid)])
 )
 
-# Plot the stacked bar chart
+
+# Plot the stacked bar chart with filtered data
 ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.Total, fill = Category)) +
   geom_bar(stat = "identity", position = "fill") +
   labs(title = "Percentage of funding spent on different categories by source",
@@ -263,13 +267,49 @@ ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.
   scale_fill_discrete(name = "What for",
                       labels = c("Prevention" = "Prevention",
                                  "Literally Homeless" = "Literally Homeless")) +
-  geom_text(aes(label = scales::percent(Percent.of.Total, accuracy = 0.1)), 
+  geom_text(aes(label = ifelse(Percent.of.Total >= 0.02, scales::percent(Percent.of.Total, accuracy = 0.1), "")), 
             position = position_fill(vjust = 0.5)) +  
   theme_minimal() +
   scale_y_continuous(labels = scales::percent_format(scale = 100))
   
 ```
-  
+
+In this last section I want to focus on the agencies/programs that refer individuals to the Housing Solutions Fund. The main question I had is if there is a significant difference between the amount of money an individual gets based off of their referring entity. Using a simple regression model to see if there is any statistical significance between the Referral forms. 
+
+```{r Form Stat, echo=FALSE, results='hide', message=FALSE}
+#load data
+solutions_fund <- X20231122_solutions_fund
+
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+#remove any spaces in the referral from column
+solutions_fund$Referral.from <- gsub(" ", "", solutions_fund$Referral.from)
+
+#convert all referral from to upper case
+solutions_fund$Referral.from <- toupper(solutions_fund$Referral.from)
+
+# Calculate the average paid for each Referral from
+average_paid_by_referral <- solutions_fund %>% 
+  group_by(Referral.from) %>%
+  summarize(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
+  arrange(desc(AveragePaid))
+
+print(average_paid_by_referral)
+
+#filter out rows where referral = MISSING
+filtered_data <- solutions_fund %>%
+  filter(Referral.from != "MISSING")
+
+#create a regression model
+model <- lm(Total.paid ~ Referral.from, data = filtered_data)
+
+#summary of model
+summary(model)
+
+```
+
+
 ```{r, echo=FALSE, results='hide', message=FALSE}
 ### Funding by source and referral from
 library(plotrix)
@@ -311,7 +351,6 @@ ggplot(filtered_data, aes(x = Funding.Source, y = Referral.from, size = Total.pa
        x = "Funding Source",
        y = "Referral from",
        size = "Total Paid",
-       color = "Referral from") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```

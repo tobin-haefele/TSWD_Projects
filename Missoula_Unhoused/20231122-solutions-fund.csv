@@ -7,23 +7,23 @@ DV-UI,White,No,Y,$802.40 ,OBT, check ,6/10/2023,6/6/2023,YWCA,Caras Property Mgm
 192574,White,No,Y,$265.00 ,OBT, check ,6/10/2023,6/7/2023,211,MHA,rent,Prevention
 198751,White,No,Y,$88.79 ,OBT, check ,6/10/2023,6/8/2023,211,Grizzly Property Mgmt,rent,Prevention
 198762,White,No,Y,$900.00 ,OBT, check ,6/10/2023,6/8/2023,211,Donald A. Matelich,rent,Prevention
-197997,Native American,No,Y,"$1,000.00 ",Missoula Gives, check ,6/10/2023,6/8/2023,549-HOPE (HRM),MHA,rent,Prevention
-166484,White ,No,Y,$415.00 ,Missoula Gives, check ,6/10/2023,6/7/2023,549-HOPE (HRM),Bair Clark Properties LLC,lot rent,Prevention
-195085,White,No,Y,$700.00 ,OBT, check ,6/10/2023,6/6/2023,549-HOPE (HRM),"Five Star Investments, LLC",rent,Prevention
-191306,White,Yes,Y,$375.00 ,OBT, check ,6/10/2023,5/30/2023,549-HOPE (HRM),Confederated Salish and Kootenai Tribes ,rent,Prevention
-186937,White,No,Y,$511.00 ,OBT, check ,6/10/2023,6/1/2023,549-HOPE (HRM),"Fidelity Mgmt Services, Inc.",rent,Prevention
-198549,White,No,Y,$700.00 ,OBT, check ,6/10/2023,6/1/2023,549-HOPE (HRM),Garden City Property Mgmt ,rent,Prevention
-198433,White,No,Y,$465.00 ,OBT, check ,6/10/2023,6/1/2023,549-HOPE (HRM),Grandview Place Apts,rent,Prevention
-165676,Native American,No,Y,$337.00 ,OBT, check ,6/10/2023,6/6/2023,549-HOPE (HRM),"PM Rentals, LLC",rent,Prevention
-168186,White,No,Y,$800.00 ,OBT, check ,6/10/2023,6/8/2023,549-HOPE (HRM),Travois Village,lot rent & mortage assistance ,Prevention
-191456,Native American,No,Y,$340.00 ,OBT, check ,6/10/2023,6/8/2023,549-HOPE (HRM),Summit d/b/a HomeRiver Group,rent,Prevention
+197997,Native American,No,Y,"$1,000.00 ",Missoula Gives, check ,6/10/2023,6/8/2023,HRM,MHA,rent,Prevention
+166484,White ,No,Y,$415.00 ,Missoula Gives, check ,6/10/2023,6/7/2023,HRM,Bair Clark Properties LLC,lot rent,Prevention
+195085,White,No,Y,$700.00 ,OBT, check ,6/10/2023,6/6/2023,HRM,"Five Star Investments, LLC",rent,Prevention
+191306,White,Yes,Y,$375.00 ,OBT, check ,6/10/2023,5/30/2023,HRM,Confederated Salish and Kootenai Tribes ,rent,Prevention
+186937,White,No,Y,$511.00 ,OBT, check ,6/10/2023,6/1/2023,HRM,"Fidelity Mgmt Services, Inc.",rent,Prevention
+198549,White,No,Y,$700.00 ,OBT, check ,6/10/2023,6/1/2023,HRM,Garden City Property Mgmt ,rent,Prevention
+198433,White,No,Y,$465.00 ,OBT, check ,6/10/2023,6/1/2023,HRM,Grandview Place Apts,rent,Prevention
+165676,Native American,No,Y,$337.00 ,OBT, check ,6/10/2023,6/6/2023,HRM,"PM Rentals, LLC",rent,Prevention
+168186,White,No,Y,$800.00 ,OBT, check ,6/10/2023,6/8/2023,HRM,Travois Village,lot rent & mortage assistance ,Prevention
+191456,Native American,No,Y,$340.00 ,OBT, check ,6/10/2023,6/8/2023,HRM,Summit d/b/a HomeRiver Group,rent,Prevention
 198581,White,No,Y,$450.00 ,OBT, check ,6/10/2023,6/1/2023,RCM,"Sober Beginnings, LLC",rent&application fee,Prevention
-144588,White,No,Y,$800.00 ,OBT, check ,6/1/2023,5/24/2023,549-HOPE (HRM),Adea Property Mgmt,rental debt,Literally Homeless
+144588,White,No,Y,$800.00 ,OBT, check ,6/1/2023,5/24/2023,HRM,Adea Property Mgmt,rental debt,Literally Homeless
 198294,White,No,Y,$675.00 ,OBT, check ,6/1/2023,5/22/2023,AWARE,MHA-Palace Apts,deposit,Literally Homeless
 198401,White,Yes,Y,$946.00 ,OBT, check ,6/1/2023,5/25/2023,211,"Fidelity Mgmt Services, Inc.",rent,Prevention
 198411,White,No,Y,$800.00 ,OBT, check ,6/1/2023,5/30/2023,211,Justin J. Haggerty,rent,Prevention
-195200,White,No,Y,$500.00 ,OBT, check ,6/1/2023,5/23/2023,549-HOPE (HRM),Vickie Amundson (Grizzly Apts),rent,Prevention
-176737,White,No,N,$775.00 ,OBT, check ,6/1/2023,5/24/2023,549-HOPE (HRM),Target Range Trailer Court,rent,Prevention
+195200,White,No,Y,$500.00 ,OBT, check ,6/1/2023,5/23/2023,HRM,Vickie Amundson (Grizzly Apts),rent,Prevention
+176737,White,No,N,$775.00 ,OBT, check ,6/1/2023,5/24/2023,HRM,Target Range Trailer Court,rent,Prevention
 192312,White,No,Y,$314.00 ,OBT, check ,6/1/2023,5/19/2023,POV,MHA,rent debt,Prevention
 184724,Native American,No,N,$71.50 ,OBT, CC ,5/25/2023,,RCM,Jefferson Lines,bus ticket,Literally Homeless
 198133,White,No,Y,$800.00 ,AHTF, check ,5/20/2023,5/11/2023,211,"Aisling Properties, LLC",deposit,Literally Homeless
@@ -34,12 +34,12 @@ DV-UI,White,No,Y,$802.40 ,OBT, check ,6/10/2023,6/6/2023,YWCA,Caras Property Mgm
 198267,White,No,Y,$800.00 ,AHTF, check ,5/20/2023,5/18/2023,211,Caras Property Mgmt,rent,Prevention
 169015,White,No,Y,$695.00 ,OBT, check ,5/20/2023,5/18/2023,211,Equinox,,Prevention
 157702,White ,Yes,Y,$800.00 ,OBT, check ,5/20/2023,5/19/2023,211,Tim Burt ,rent,Prevention
-195019,Native American,No,Y,$534.00 ,AHTF, check ,5/20/2023,5/18/2023,549-HOPE (HRM),Missoula Property Mgmt,rent,Prevention
-197681,White,No,Y,"$1,000.00 ",OBT, check ,5/20/2023,5/10/2023,549-HOPE (HRM),Garden City Property Mgmt,rent,Prevention
-198037,White,No,Y,$990.00 ,OBT, check ,5/20/2023,5/19/2023,549-HOPE (HRM),Lola Wilkinson,rent,Prevention
+195019,Native American,No,Y,$534.00 ,AHTF, check ,5/20/2023,5/18/2023,HRM,Missoula Property Mgmt,rent,Prevention
+197681,White,No,Y,"$1,000.00 ",OBT, check ,5/20/2023,5/10/2023,HRM,Garden City Property Mgmt,rent,Prevention
+198037,White,No,Y,$990.00 ,OBT, check ,5/20/2023,5/19/2023,HRM,Lola Wilkinson,rent,Prevention
 183131,White,No,Y,$584.00 ,AHTF, check ,5/20/2023,5/10/2023,HRC,Burlington Gardens LLC,rent,Prevention
 197965,Native American,No,Y,$45.00 ,AHTF, check ,5/10/2023,5/8/2023,211,Grizzly Property Mgmt,Application Fee,Literally Homeless
-197359,White,No,Y,"$1,000.00 ",AHTF, check ,5/10/2023,5/2/2023,549-HOPE (HRM),"The Dwelling Place, Inc",rent,Literally Homeless
+197359,White,No,Y,"$1,000.00 ",AHTF, check ,5/10/2023,5/2/2023,HRM,"The Dwelling Place, Inc",rent,Literally Homeless
 186169,White,No,Y,$594.00 ,AHTF, check ,5/10/2023,4/28/2023,211,Sentinel Village Apts,rent,Prevention
 166328,Native American,No,Y,"$1,000.00 ",AHTF, check ,5/10/2023,4/28/2023,211,University Villages,rent,Prevention
 177383,White,No,Y,$320.00 ,AHTF, check ,5/10/2023,5/2/2023,211,MHA-Palace Apts,rent,Prevention
@@ -49,8 +49,8 @@ DV-UI,White,No,Y,$802.40 ,OBT, check ,6/10/2023,6/6/2023,YWCA,Caras Property Mgm
 197989,White,No,Y,$974.50 ,AHTF, check ,5/10/2023,5/8/2023,211,Adea Property Mgmt,1st month's rent,Prevention
 198054,White,No,Y,$550.00 ,AHTF, check ,5/10/2023,5/9/2023,211,MHA,deposit,Prevention
 197655,White,No,N,$775.00 ,OBT, check ,5/10/2023,4/28/2023,211,"HCM, LLC",rent,Prevention
-197983,White,No,Y,$440.00 ,AHTF, check ,5/10/2023,5/8/2023,549-HOPE (HRM),Grandview Place Apts,rent,Prevention
-197861,White,No,Y,$800.00 ,OBT, check ,5/10/2023,5/4/2023,549-HOPE (HRM),Creekside Apts,rent,Prevention
+197983,White,No,Y,$440.00 ,AHTF, check ,5/10/2023,5/8/2023,HRM,Grandview Place Apts,rent,Prevention
+197861,White,No,Y,$800.00 ,OBT, check ,5/10/2023,5/4/2023,HRM,Creekside Apts,rent,Prevention
 48988,White,No,Y,$433.00 ,AHTF, check ,5/10/2023,5/5/2023,POV,MHA,rent & deposit,Prevention
 189125,White,No,Y,$502.32 ,AHTF, check ,5/5/2023,,211,Northwestern Energy,utility arrears,Prevention
 104575,White,No,N,$71.50 ,AHTF, cc ,5/4/2023,,RCM,Jefferson Lines,bus ticket,Literally Homeless
@@ -64,11 +64,11 @@ DV-UI,White,No,Y,$802.40 ,OBT, check ,6/10/2023,6/6/2023,YWCA,Caras Property Mgm
 197612,Pacific Islander,No,Y,"$1,000.00 ",AHTF, check ,5/1/2023,4/26/2023,211,Sentinel Village Apts,rent,Prevention
 197637,White,No,Y,$800.00 ,AHTF, check ,5/1/2023,4/27/2023,211,Jill Pigman ,deposit,Prevention
 171792,White,No,Y,$800.00 ,AHTF, check ,5/1/2023,4/27/2023,211,Adea Property Mgmt,rent,Prevention
-197187,White,No,Y,$800.00 ,AHTF, check ,5/1/2023,4/20/2023,549-HOPE (HRM),"Silvertip Housing, Inc.",rent,Prevention
-197365,White,No,N,$800.00 ,AHTF, check ,5/1/2023,4/24/2023,549-HOPE (HRM),Majestic Montana Properties Inc.,rent,Prevention
-197399,White,No,Y,"$1,000.00 ",AHTF, check ,5/1/2023,4/25/2023,549-HOPE (HRM),Odette Aline Grassi,rent,Prevention
-184930,White,Yes,Y,$871.00 ,OBT, check ,5/1/2023,4/19/2023,549-HOPE (HRM),"Silvertip Housing, Inc.",rent,Prevention
-193864,White,Yes,Y,$789.00 ,AHTF, check ,5/1/2023,4/27/2023,549-HOPE (HRM),Blueline Property Mgmt,deposit,Literally Homeless
+197187,White,No,Y,$800.00 ,AHTF, check ,5/1/2023,4/20/2023,HRM,"Silvertip Housing, Inc.",rent,Prevention
+197365,White,No,N,$800.00 ,AHTF, check ,5/1/2023,4/24/2023,HRM,Majestic Montana Properties Inc.,rent,Prevention
+197399,White,No,Y,"$1,000.00 ",AHTF, check ,5/1/2023,4/25/2023,HRM,Odette Aline Grassi,rent,Prevention
+184930,White,Yes,Y,$871.00 ,OBT, check ,5/1/2023,4/19/2023,HRM,"Silvertip Housing, Inc.",rent,Prevention
+193864,White,Yes,Y,$789.00 ,AHTF, check ,5/1/2023,4/27/2023,HRM,Blueline Property Mgmt,deposit,Literally Homeless
 195043,Native American,No,Y,$600.00 ,AHTF, check ,5/1/2023,4/25/2023,RCM,"HKJ, Inc. dba Winds of Change",deposit,Literally Homeless
 167167,White,No,Y,$600.00 ,AHTF,check,4/20/2023,4/11/2023,PHC,Palace Apartments-MHA,deposit,Literally Homeless
 196844,Black,No,Y,"$1,000.00 ",AHTF,check,4/20/2023,4/10/2023,PHC,Adam Pely (private landlord),deposit,Literally Homeless
@@ -83,7 +83,7 @@ DV-UI,White,No,Y,$802.40 ,OBT, check ,6/10/2023,6/6/2023,YWCA,Caras Property Mgm
 197363,White,No,Y,$370.50 ,AHTF,check,4/20/2023,4/18/2023,211,Caras Property Mgmt,rent,Prevention
 197372,White,No,Y,$650.00 ,AHTF,check,4/20/2023,4/18/2023,211,Westview Mobile Home Park,lot rent,Prevention
 197413,White,No,Y,$983.00 ,AHTF,check,4/20/2023,4/19/2023,211,Creekside Apts,rent,Prevention
-196858,White,No,Y,$755.00 ,AHTF,check,4/20/2023,4/12/2023,549-HOPE (HRM),Martins Property Mgmt,rent,Prevention
+196858,White,No,Y,$755.00 ,AHTF,check,4/20/2023,4/12/2023,HRM,Martins Property Mgmt,rent,Prevention
 197406,White,Yes,N,$60.00 ,AHTF,check,4/20/2023,4/19/2023,211,Clark Fork Realty,application fee,Literally Homeless
 163129,White,No,Y,$50.50 ,AHTF, cc ,4/20/2023,,POV,Jefferson Lines,bus ticket,Literally Homeless
 191122,White,No,Y,$300.00 ,AHTF,cc,4/17/2023,,211,Conoco,gas,Prevention
@@ -93,9 +93,9 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 196955,White,No,Y,"$1,000.00 ",AHTF,check,4/10/2023,4/3/2023,211,"Vista Ventures, LLP",rent,Prevention
 197019,White,Yes,Y,$800.00 ,AHTF,check,4/10/2023,4/5/2023,211,Patrick Marsolek,rent,Prevention
 164108,White,No,Y,$700.00 ,AHTF,check,4/10/2023,4/5/2023,211,Daniel Chilcote,rent,Prevention
-196761,Native American,No,Y,$800.00 ,AHTF,check,4/10/2023,3/31/2023,549-HOPE (HRM),Creekside Apts,rent,Prevention
+196761,Native American,No,Y,$800.00 ,AHTF,check,4/10/2023,3/31/2023,HRM,Creekside Apts,rent,Prevention
 189732,White,No,Y,"$1,000.00 ",AHTF,check,4/10/2023,4/7/2023,HOT,Professional PM,deposit,Prevention
-185909,White,No,N,$750.00 ,AHTF,check,4/10/2023,3/31/2023,549-HOPE (HRM),MHA,deposit,Literally Homeless
+185909,White,No,N,$750.00 ,AHTF,check,4/10/2023,3/31/2023,HRM,MHA,deposit,Literally Homeless
 167059,White,No,Y,$294.40 ,AHTF,cc,4/3/2023,,POV,Jefferson Lines,bus ticket ,Literally Homeless
 177383,White,No,Y,$680.00 ,AHTF,check,4/1/2023,3/20/2023,211,MHA-Palace Apts,rent,Prevention
 164745,Native American/White,No,Y,$800.00 ,AHTF,check,4/1/2023,3/20/2023,211,WMMHC-Carol Graham House,rent,Prevention
@@ -106,9 +106,9 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 196833,White,Yes,Y,$790.00 ,AHTF,check,4/1/2023,3/30/2023,211,MT Properties Group,rent,Prevention
 196841,White,Yes,Y,$902.00 ,AHTF,check,4/1/2023,3/30/2023,211,Bitterroot Property Mgmt,rent,Prevention
 196870,White,No,Y,$800.00 ,AHTF,check,4/1/2023,3/30/2023,211,Copper Run Investors LLC,rent,Prevention
-196399,White,No,Y,$798.00 ,AHTF,check,4/1/2023,3/28/2023,549-HOPE (HRM),Creekside Apts,rent,Prevention
-168593,White,No,Y,"$1,000.00 ",AHTF,check,4/1/2023,3/24/2023,549-HOPE (HRM),Missoula Property Mgmt,deposit,Prevention
-196517,White,No,N,$817.60 ,AHTF,cc,3/24/2023,,549-HOPE (HRM),Ashlynn Place,deposit,Prevention
+196399,White,No,Y,$798.00 ,AHTF,check,4/1/2023,3/28/2023,HRM,Creekside Apts,rent,Prevention
+168593,White,No,Y,"$1,000.00 ",AHTF,check,4/1/2023,3/24/2023,HRM,Missoula Property Mgmt,deposit,Prevention
+196517,White,No,N,$817.60 ,AHTF,cc,3/24/2023,,HRM,Ashlynn Place,deposit,Prevention
 163925,White,No,Y,$325.00 ,AHTF, check ,3/20/2023,3/10/2023,211,Garden City Property Mgmt,rent,Prevention
 196386,White,No,Y,"$1,000.00 ",AHTF,check,3/20/2023,3/15/2023,211,MT Properties Group,rent,Prevention
 167318,White,No,Y,$948.00 ,AHTF,check,3/20/2023,3/16/2023,211,MHA,rent,Prevention
@@ -124,7 +124,7 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 166543,White,No,Y,$467.97 ,AHTF, check ,3/10/2023,3/6/2023,211,Council Groves Apts,rent,Prevention
 196152,White,No,Y,$300.00 ,AHTF, check ,3/10/2023,3/6/2023,211,Albert R. Arviso III,rent,Prevention
 196191,White,No,N,$800.00 ,AHTF, check ,3/10/2023,3/7/2023,211,Homestead Restoration,rent,Prevention
-170872,Native American,No,Y,$800.00 ,AHTF, check ,3/10/2023,3/7/2023,549-HOPE (HRM),Missoula Property Mgmt,deposit,Prevention
+170872,Native American,No,Y,$800.00 ,AHTF, check ,3/10/2023,3/7/2023,HRM,Missoula Property Mgmt,deposit,Prevention
 189949,White,No,Y,$40.00 ,AHTF, check ,3/10/2023,3/3/2023,POV,Professional PM,application fee,Prevention
 182788,White,No,Y,$800.00 ,AHTF, check ,3/10/2023,3/6/2023,211,MHA-Trinity Apartments LLC,deposit,Literally Homeless
 196251,White,Yes,N,$78.46 ,AHTF, cc ,3/10/2023,,POV,Jefferson Lines,bus ticket,Literally Homeless
@@ -136,14 +136,14 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 195632,White,No,Y,$499.50 ,AHTF, check ,2/20/2023,2/16/2023,211,HomeRiver Group,renter's insurance,Prevention
 190994,Asian American/White,No,Y,$772.00 ,AHTF, check ,2/20/2023,2/10/2023,211,Sentinel Village Apts,rent,Prevention
 194852,Native American,No,N,$35.00 ,AHTF, check ,2/20/2023,2/10/2023,Providence,Grizzly Property Mgmt,rental application fee,Literally Homeless
-194936,White,No,N,$626.00 ,AHTF, check ,2/14/2023,,549-HOPE (HRM),Uhual,relocation assistance,Prevention
+194936,White,No,N,$626.00 ,AHTF, check ,2/14/2023,,HRM,Uhual,relocation assistance,Prevention
 195341,White,No,Y,$700.00 ,AHTF, check ,2/10/2023,2/3/2023,211,David A.R. Harmon,rent,Prevention
 188655,White,No,Y,"$1,000.00 ",AHTF, check ,2/10/2023,2/7/2023,211,Horizon Rentals,rent,Prevention
 195528,White,No,Y,$800.00 ,AHTF, check ,2/10/2023,2/8/2023,211,Tamara Bessette,rent,Prevention
 195548,White,No,N,$448.00 ,AHTF, check ,2/10/2023,2/8/2023,211,MHA-Trinity Apartments LLC,rent,Prevention
 195537,White,No,Y,"$1,000.00 ",AHTF, check ,2/10/2023,2/8/2023,211,Horizon Rentals,rent,Prevention
 195555,White,No,Y,"$1,000.00 ",AHTF, check ,2/10/2023,2/8/2023,211,Horizon Rentals,deposit,Prevention
-195184,Black/African American,No,Y,"$1,000.00 ",AHTF, check ,2/10/2023,2/3/2023,549-HOPE (HRM),Jim & Cyndi Meyer,rent,Prevention
+195184,Black/African American,No,Y,"$1,000.00 ",AHTF, check ,2/10/2023,2/3/2023,HRM,Jim & Cyndi Meyer,rent,Prevention
 161523,White,No,Y,$198.47 ,AHTF, check ,2/10/2023,2/8/2023,OAA,MHA,damage repairs,Prevention
 195456,Native American,No,Y,$500.00 ,AHTF, check ,2/10/2023,2/6/2023,WMMHC,WBIC,rent,Prevention
 193942,White,No,Y,$111.00 ,AHTF, CC ,2/6/2023,,211,Greyhound,bus ticket,Literally Homeless
@@ -167,12 +167,12 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 163775,,,Y,$500.00 ,Providence , check ,11/1/2022,10/27/2022,211,O&L Kelley LLC,deposit,Prevention
 193545,,,Y,$600.00 ,Providence , check ,11/1/2022,10/31/2022,211,Hershel Rosenbaum,deposit,Prevention
 193552,,,Y,$600.00 ,Providence , check ,11/1/2022,10/31/2022,211,Troy Leistiko,deposit,Prevention
-192292,,,Y,$800.00 ,Providence , check ,11/1/2022,10/24/2022,549-HOPE (HRM),Target Range Trailer Court,lot rent,Prevention
-176479,,,Y,$600.00 ,Providence , check ,10/24/2022,,549-HOPE (HRM),Kathleen Kautzman,rental arrears,Prevention
+192292,,,Y,$800.00 ,Providence , check ,11/1/2022,10/24/2022,HRM,Target Range Trailer Court,lot rent,Prevention
+176479,,,Y,$600.00 ,Providence , check ,10/24/2022,,HRM,Kathleen Kautzman,rental arrears,Prevention
 192309,,,N,$221.00 ,Providence , cc ,10/21/2022,,TSOS,Jefferson Lines,bus ticket,Literally Homeless
 191170,,,Y,$75.00 ,Providence , check ,10/20/2022,10/19/2022,211,private landlord,application fees,Literally Homeless
 174740,,,N,$333.00 ,Providence , check ,10/20/2022,10/19/2022,211,Anaconda Housing Authority,rental debt,Literally Homeless
-193061,,,Y,$334.99 ,Providence , cc ,10/20/2022,,549-HOPE (HRM),Missoula Water,utilities,Prevention
+193061,,,Y,$334.99 ,Providence , cc ,10/20/2022,,HRM,Missoula Water,utilities,Prevention
 176605,,,Y,$44.39 ,Providence , cc ,10/17/2022,,211,Caras PM,application fee,Literally Homeless
 164365,,,Y,$450.00 ,Providence , cc ,10/11/2022,,PHC,NW Collections,debt,Literally Homeless
 191676,,,N,$600.00 ,Providence , check ,10/10/2022,10/3/2022,211," OLR, LLC ", deposit ,Prevention
@@ -183,7 +183,7 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 192404,,,Y,$800.00 ,OBT, check ,10/1/2022,9/20/2022,211,Fidelity PM,deposit ,Prevention
 192574,,,Y,$285.00 ,Providence , check ,10/1/2022,,211,MHA,rent assistance,Prevention
 192788,,,Y,$455.00 ,Providence , check ,10/1/2022,9/30/2022,211,Orchard Gardens LP,rent,Prevention
-192500,,,Y,$478.63 ,Providence , check ,10/1/2022,9/27/2022,549-HOPE (HRM),Travois Village,lot rent,Prevention
+192500,,,Y,$478.63 ,Providence , check ,10/1/2022,9/27/2022,HRM,Travois Village,lot rent,Prevention
 185061,,,Y,$253.00 ,Providence , cc ,9/29/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 180132,,,Y,$47.46 ,OBT, cc ,9/23/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 174863,,,N,$179.50 ,OBT, cc ,9/22/2022,,211,jefferson Lines,bus ticket,Literally Homeless
@@ -191,16 +191,16 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 192295,,,Y,$802.83 ,EFSG, check ,9/20/2022,9/14/2022,211,ADEA ,rent,Prevention
 192094,,,Y,$650.00 ,OBT, check ,9/20/2022,9/16/2022,211,MHA,deposit,Prevention
 192311,,,N,$232.00 ,OBT, cc ,9/19/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
-192156,,,Y,$600.00 ,OBT, check ,9/15/2022,9/14/2022,211/Health Dept.,Professional PM,deposit,Prevention
+192156,,,Y,$600.00 ,OBT, check ,9/15/2022,9/14/2022,211,Professional PM,deposit,Prevention
 191726,,,N,$257.00 ,OBT, cc ,9/13/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 192156,,,Y,$51.75 ,OBT, CC ,9/8/2022,,211,Missoula PM,application fee,Prevention
 192147,,,Y,$784.00 ,EFSG, check ,9/6/2022,,211,UM Housing,rent assistance,Prevention
-191836,,,Y,"$1,300.00 ",EFSG, check ,9/6/2022,,549-HOPE (HRM),Misha Chinikailo,rent assistance,Prevention
-191967,,,N,$431.00 ,OBT, cc ,9/2/2022,,549-HOPE (HRM),Jefferson Lines,bus ticket,Literally Homeless
-191970,,,N,$265.00 ,OBT, cc ,9/2/2022,,549-HOPE (HRM),Jefferson Lines,bus ticket,Literally Homeless
-191229,,,N,$87.00 ,OBT, cc ,9/2/2022,,TSOS (HRM),Jefferson Lines,bus ticket,Literally Homeless
-191227,,,N,$87.00 ,OBT, cc ,9/2/2022,,TSOS (HRM),Jefferson Lines,bus ticket,Literally Homeless
-191595,,,Y,$600.00 ,OBT, check ,9/2/2022,,549-HOPE (HRM),Missoula Works,moving costs,Prevention
+191836,,,Y,"$1,300.00 ",EFSG, check ,9/6/2022,,HRM,Misha Chinikailo,rent assistance,Prevention
+191967,,,N,$431.00 ,OBT, cc ,9/2/2022,,HRM,Jefferson Lines,bus ticket,Literally Homeless
+191970,,,N,$265.00 ,OBT, cc ,9/2/2022,,HRM,Jefferson Lines,bus ticket,Literally Homeless
+191229,,,N,$87.00 ,OBT, cc ,9/2/2022,,HRM,Jefferson Lines,bus ticket,Literally Homeless
+191227,,,N,$87.00 ,OBT, cc ,9/2/2022,,HRM,Jefferson Lines,bus ticket,Literally Homeless
+191595,,,Y,$600.00 ,OBT, check ,9/2/2022,,HRM,Missoula Works,moving costs,Prevention
 185188,,,Y,$350.00 ,EFSG, check ,9/1/2022,,211,River Run Flats ,rent assistance,Literally Homeless
 189531,,,Y,$150.00 ,OBT, cc ,9/1/2022,,211,Conoco gas card,relocation assistance,Literally Homeless
 186324,,,Y,$950.00 ,OBT, check ,9/1/2022,8/29/2022,WMMHC,Professional PM,deposit,Literally Homeless
@@ -211,18 +211,18 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 191761,,,Y,$485.00 ,OBT, check ,8/23/2022,,211,Jean Weaver,lot rent,Prevention
 191200,,,N,$257.00 ,OBT, cc ,8/22/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 187555,,,N,$71.00 ,OBT, cc ,8/22/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
-162271,,,Y,$131.45 ,Home Coalition, CC ,8/11/2022,,549-HOPE (HRM),NW Energy,utility deposit,Literally Homeless
+162271,,,Y,$131.45 ,Home Coalition, CC ,8/11/2022,,HRM,NW Energy,utility deposit,Literally Homeless
 125265,,,N,$195.00 ,OBT, cc ,8/11/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 174362,,,Y,$419.50 ,EFSG, check ,8/11/2022,,OAA,ADEA ,rent assistance,Prevention
 191517,,,Y,$40.00 ,OBT, check ,8/11/2022,,POV,Professional PM,application fee,Prevention
 191479,,,N,$80.00 ,Home Coalition, cc ,8/10/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 190756,,,Y,$890.00 ,EFSG, check ,8/10/2022,8/8/2022,211,ADEA ,lot rent,Prevention
 191520,,,Y,$13.92 ,Home Coalition, cc ,8/10/2022,,211,NW Energy,utility arrears,Prevention
-191047,,,Y,$784.00 ,EFSG, check ,8/10/2022,8/4/2022,549-HOPE (HRM),UM Housing,rent,Prevention
-191260,,,Y,$600.00 ,EFSG, check ,8/10/2022,8/4/2022,549-HOPE (HRM),Mountain Home,rent,Prevention
+191047,,,Y,$784.00 ,EFSG, check ,8/10/2022,8/4/2022,HRM,UM Housing,rent,Prevention
+191260,,,Y,$600.00 ,EFSG, check ,8/10/2022,8/4/2022,HRM,Mountain Home,rent,Prevention
 165362,,,Y,$494.00 ,EFSG, check ,8/10/2022,,POV,MHA,rent assistance,Prevention
 191484,,,Y,$387.19 ,Home Coalition, cc ,8/9/2022,,211,Plum Property Management,rent,Prevention
-191041,,,N,$218.00 ,Home Coalition, cc ,8/4/2022,,549-HOPE (HRM),Jefferson Lines,bus ticket,Literally Homeless
+191041,,,N,$218.00 ,Home Coalition, cc ,8/4/2022,,HRM,Jefferson Lines,bus ticket,Literally Homeless
 191331,,,Y,$600.00 ,Home Coalition, check ,8/2/2022,8/2/2022,HRC,Caras PM,deposit,Prevention
 191185,,,Y,"$1,000.00 ",Home Coalition, check ,8/1/2022,8/1/2022,211,Fidelity PM,deposit,Prevention
 190808,,,Y,$40.00 ,Home Coalition, check ,8/1/2022,7/21/2022,POV,Professional PM,application fee,Prevention
@@ -245,8 +245,8 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 190322,,,N,$276.00 ,Other sources/gifts, cc ,6/14/2022,,211,Jefferson Lines,bus ticket,Literally Homeless
 168181,,,Y,$275.00 ,Other sources/gifts, cc ,6/14/2022,,POV ,Jefferson Lines,bus ticket,Literally Homeless
 189756,,,Y,$610.00 ,Other sources/gifts, check ,6/10/2022,6/10/2022,PHC,Eckstroms Stage Station,RV lot deposit,Literally Homeless
-190221,,,Y,$800.00 ,Other sources/gifts, check ,6/10/2022,6/8/2022,211/MHA,DW Holdings,rental arrears,Prevention
-163921,,,Y,$600.00 ,Other sources/gifts, check ,6/10/2022,6/8/2022,549-HOPE (HRM),3 Rivers,rental arrears,Prevention
+190221,,,Y,$800.00 ,Other sources/gifts, check ,6/10/2022,6/8/2022,211,DW Holdings,rental arrears,Prevention
+163921,,,Y,$600.00 ,Other sources/gifts, check ,6/10/2022,6/8/2022,HRM,3 Rivers,rental arrears,Prevention
 190077,,,Y,$40.00 ,Other sources/gifts, check ,6/10/2022,6/2/2022,POV ,Professional PM,application fee,Prevention
 190099,,,Y,$40.00 ,Other sources/gifts, check ,6/10/2022,6/2/2022,POV ,Professional PM,application fee,Prevention
 165985,,,Y,$60.50 ,Other sources/gifts, cc ,6/2/2022,,POV ,Jefferson Lines,bus ticket,Literally Homeless
@@ -262,35 +262,35 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 189732,,,Y,$40.00 ,AHTF, check ,5/20/2022,,POV,Professional PM,application fee,Prevention
 189783,,,N,$600.00 ,AHTF, cc ,5/16/2022,,211,Crosswinds,rent,Prevention
 188645,,,N,$600.00 ,AHTF, check ,5/12/2022,,MIC,Burlington Square,deposit,Literally Homeless
-184496,,,Y,$45.00 ,AHTF, cc ,5/12/2022,,YHDP (HRC),Walmart,Phone Card,Prevention
+184496,,,Y,$45.00 ,AHTF, cc ,5/12/2022,,HRC,Walmart,Phone Card,Prevention
 189606,,,N,$208.00 ,AHTF, cc ,5/11/2022,,POV ,Jefferson Lines,bus ticket,Literally Homeless
-189465,,,Y,$500.00 ,AHTF, check ,5/10/2022,5/2/2022,549-HOPE (HRM),Mountain Home,deposit,Literally Homeless
+189465,,,Y,$500.00 ,AHTF, check ,5/10/2022,5/2/2022,HRM,Mountain Home,deposit,Literally Homeless
 169685,,,N,$71.00 ,AHTF, cc ,5/10/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 189638,,,N,$86.00 ,AHTF, cc ,5/10/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 165536,,,Y,$618.00 ,AHTF, check ,5/10/2022,5/4/2022,211,MHA,deposit,Prevention
 188528,,,N,$95.00 ,AHTF, cc ,5/9/2022,,PHC,Jefferson Lines,bus ticket,Literally Homeless
 189605,,,N,$600.00 ,AHTF, cc ,5/6/2022,,211,Crosswinds,rent,Prevention
 188528,,,N,$102.00 ,AHTF, cc ,5/4/2022,,PHC,Jefferson Lines,bus ticket,Literally Homeless
-166946,,,Y,$275.00 ,AHTF, cc ,5/3/2022,,549-HOPE (HRM),Jefferson Lines,bus ticket,Literally Homeless
-179925,,,Y,$600.00 ,AHTF, check ,5/3/2022,5/3/2022,549-HOPE (HRM),MW Mullan Assoc.,rent,Prevention
+166946,,,Y,$275.00 ,AHTF, cc ,5/3/2022,,HRM,Jefferson Lines,bus ticket,Literally Homeless
+179925,,,Y,$600.00 ,AHTF, check ,5/3/2022,5/3/2022,HRM,MW Mullan Assoc.,rent,Prevention
 184673,,,Y,$646.49 ,AHTF, cc ,5/2/2022,,YWCA,NW Energy,utility arrears,Literally Homeless
 175072,,,Y,$650.00 ,AHTF, check ,5/1/2022,4/29/2022,211,MHA,deposit,Literally Homeless
-189373,,,Y,$600.00 ,AHTF, check ,5/1/2022,4/29/2022,549-HOPE (HRM),David Ketchum,rent,Prevention
+189373,,,Y,$600.00 ,AHTF, check ,5/1/2022,4/29/2022,HRM,David Ketchum,rent,Prevention
 187960,,,Y,$318.00 ,AHTF, check ,5/1/2022,4/20/2022,POV,MHA,rental arrears,Prevention
 187659,,,Y,$195.00 ,AHTF, cc ,4/21/2022,,PHC,Jefferson Lines,bus ticket,Literally Homeless
-181020,,,Y,$100.00 ,AHTF, check ,4/20/2022,4/12/2022,549-HOPE (HRM),WBIC,rent,Prevention
+181020,,,Y,$100.00 ,AHTF, check ,4/20/2022,4/12/2022,HRM,WBIC,rent,Prevention
 187960,,,Y,$111.59 ,AHTF, cc ,4/20/2022,,POV,NW Energy,utilities,Prevention
 188946,,,Y,$800.00 ,AHTF, check ,4/20/2022,4/12/2022,WMMHC,Professional PM,deposit,Prevention
 165979,,,Y,$288.00 ,AHTF, check ,4/20/2022,4/18/2022,WMMHC,Skyview Apartments,rent,Prevention
 178354,,,N,$600.00 ,AHTF, CC ,4/18/2022,,211,Crosswinds,rent,Literally Homeless
 162067,,,Y,$60.00 ,AHTF, cc ,4/15/2022,,211,Jefferson Lines,bus ticket,Literally Homeless
 189147,,,N,$387.00 ,AHTF, cc ,4/15/2022,,211,Jefferson Lines,bus ticket,Literally Homeless
-187390,,,Y,$550.00 ,AHTF, check ,4/10/2022,4/6/2022,549-HOPE (HRM),MIC,moving cost,Prevention
-187749,,,Y,$350.00 ,AHTF, check ,4/10/2022,4/8/2022,549-HOPE (HRM),ROAM,rent,Prevention
+187390,,,Y,$550.00 ,AHTF, check ,4/10/2022,4/6/2022,HRM,MIC,moving cost,Prevention
+187749,,,Y,$350.00 ,AHTF, check ,4/10/2022,4/8/2022,HRM,ROAM,rent,Prevention
 165623,,,Y,$626.48 ,AHTF, CC ,4/6/2022,,Providence,NW Energy,utility debt,Literally Homeless
 174260,,,N,$600.00 ,AHTF, CC ,4/4/2022,,211,Crosswinds,rent,Prevention
 188781,,,N,$600.00 ,AHTF, CC ,4/4/2022,,WMMHC,Crosswinds,rent,Prevention
-188667,,,Y,$600.00 ,AHTF, check ,4/1/2022,,549-HOPE (HRM),MT Properties Group,rent,Prevention
+188667,,,Y,$600.00 ,AHTF, check ,4/1/2022,,HRM,MT Properties Group,rent,Prevention
 188668,,,Y,$752.32 ,OBT, check ,4/1/2022,3/29/2022,HRC,Ed Johnson Properties,deposit,Prevention
 188433,,,Y,$600.00 ,AHTF, check ,4/1/2022,,WMMHC,Inside Out Handyman,home repair,Prevention
 184812,,,Y,$135.00 ,OBT, cc ,3/28/2022,,YWCA,Conoco,gas card,Literally Homeless
@@ -298,33 +298,33 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 188247,,,N,$152.00 ,OBT, cc ,3/16/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 188134,,,N,$302.00 ,OBT, cc ,3/10/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
 184710,,,N,$600.00 ,OBT, cc ,3/10/2022,,211,Crosswinds,rent,Prevention
-181020,,,Y,$500.00 ,OBT, check ,3/10/2022,3/4/2022,549-HOPE (HRM),WBIC,rent,Prevention
-168813,,,Y,$800.00 ,OBT, check ,3/10/2022,3/9/2022,549-HOPE (HRM),Highland PM,rent arrears,Prevention
-184496,,,Y,$49.50 ,OBT, cc ,3/3/2022,,YHDP (HRC),State Farm,renters insurance,Literally Homeless
+181020,,,Y,$500.00 ,OBT, check ,3/10/2022,3/4/2022,HRM,WBIC,rent,Prevention
+168813,,,Y,$800.00 ,OBT, check ,3/10/2022,3/9/2022,HRM,Highland PM,rent arrears,Prevention
+184496,,,Y,$49.50 ,OBT, cc ,3/3/2022,,HRC,State Farm,renters insurance,Literally Homeless
 163540,,,Y,$78.00 ,OBT, cc ,3/1/2022,,HOT,Jefferson Lines,bus ticket,Literally Homeless
 171566,,,Y,$249.00 ,OBT, cc ,3/1/2022,,HOT,Jefferson Lines,bus ticket,Literally Homeless
 165654,,,Y,$20.00 ,OBT, check ,3/1/2022,2/22/2022,PHC,Skyview Apartments,application fee,Literally Homeless
 185509,,,N,$674.00 ,OBT, check ,3/1/2022,2/28/2022,POV,Missoula Manor,deposit/rent,Literally Homeless
-187693,,,N,$600.00 ,OBT, check ,3/1/2022,2/25/2022,549-HOPE (HRM),Tia Holyk,rental arrears,Prevention
+187693,,,N,$600.00 ,OBT, check ,3/1/2022,2/25/2022,HRM,Tia Holyk,rental arrears,Prevention
 183065,,,N,$215.00 ,OBT, cc ,2/28/2022,,211,Jefferson Lines,bus ticket,Literally Homeless
 187894,,,N,$600.00 ,OBT, cc ,2/28/2022,,211,Crosswinds,rental arrears,Prevention
 182039,,,N,$600.00 ,OBT, cc ,2/28/2022,,211,Crosswinds,rental arrears,Prevention
-187749,,,N,$250.00 ,OBT, check ,2/24/2022,,549-HOPE (HRM),ROAM,deposit,Literally Homeless
+187749,,,N,$250.00 ,OBT, check ,2/24/2022,,HRM,ROAM,deposit,Literally Homeless
 186756,,,Y,$300.00 ,OBT, CC ,2/22/2022,,211,Conoco/Sinclair,gas card,Literally Homeless
 184376,,,Y,$172.60 ,AHTF, check ,2/20/2022,2/14/2022,POV,Derin Aimee Dorsett,ticket reimbursement,Literally Homeless
-187478,,,Y,$600.00 ,OBT, check ,2/20/2022,2/16/2022,549-HOPE (HRM),John Herring,rental arrears,Prevention
+187478,,,Y,$600.00 ,OBT, check ,2/20/2022,2/16/2022,HRM,John Herring,rental arrears,Prevention
 169457,,,Y,$600.00 ,OBT, check ,2/20/2022,2/15/2022,WMMHC,At Home Assisted Living,rental debt,Prevention
 187597,,,Y,$600.00 ,OBT, check ,2/15/2022,,211,Missoula PM,lot rent,Prevention
 187522,,,N,$600.00 ,AHTF, CC ,2/14/2022,,211,Crosswinds,rent,Prevention
 164341,,,Y,$500.00 ,AHTF,,2/11/2022,,POV ,Law Firm,attorney fees,Literally Homeless
 163540,,,Y,$86.00 ,AHTF, CC ,2/11/2022,,POV ,Jefferson Lines,bus ticket,Literally Homeless
-178085,,,Y,$526.00 ,OBT, check ,2/10/2022,2/2/2022,549-HOPE (HRM),Tamarack,rent,Literally Homeless
+178085,,,Y,$526.00 ,OBT, check ,2/10/2022,2/2/2022,HRM,Tamarack,rent,Literally Homeless
 148631,,,Y,$255.00 ,AHTF, check ,2/10/2022,2/9/2022,YWCA,MHA,rental debt,Literally Homeless
-187354,,,Y,$675.00 ,AHTF, check ,2/10/2022,2/9/2022,549-HOPE (HRM),James Cooney,rent,Prevention
-187398,,,Y,$600.00 ,AHTF, check ,2/10/2022,2/9/2022,549-HOPE (HRM),Grizzly PM,rent ,Prevention
+187354,,,Y,$675.00 ,AHTF, check ,2/10/2022,2/9/2022,HRM,James Cooney,rent,Prevention
+187398,,,Y,$600.00 ,AHTF, check ,2/10/2022,2/9/2022,HRM,Grizzly PM,rent ,Prevention
 187429,,,Y,$238.00 ,AHTF, CC ,2/9/2022,,POV,Jefferson Lines,bus ticket,Literally Homeless
-163085,,,Y,$378.36 ,AHTF, cc ,2/8/2022,,TSOS (HRM),CSC Collections,rental debt,Literally Homeless
-161530,,,Y,$800.00 ,AHTF, check ,2/7/2022,,549-HOPE (HRM),Chilcote Builders,deposit,Prevention
+163085,,,Y,$378.36 ,AHTF, cc ,2/8/2022,,HRM,CSC Collections,rental debt,Literally Homeless
+161530,,,Y,$800.00 ,AHTF, check ,2/7/2022,,HRM,Chilcote Builders,deposit,Prevention
 167167,,,Y,$20.00 ,OBT, cc ,2/4/2022,,PHC,Skyview Apartments,application fees,Literally Homeless
 177888,,,Y,$38.00 ,AHTF, check ,2/3/2022,2/10/2022,POV,Burlington Square,application fees,Literally Homeless
 165695,,,N,$600.00 ,OBT, cc ,2/3/2022,,211,Crosswinds,rent,Prevention
@@ -334,12 +334,12 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 177273,,,Y,$601.99 ,OBT,,1/31/2022,,YWCA,NW Energy,utility debt,Literally Homeless
 163919,,,Y,$81.00 ,OBT, CC ,1/26/2022,,HOT,Jefferson Lines,bus fare,Literally Homeless
 186937,,,Y,$618.00 ,OBT, CC ,1/26/2022,,211,Fidelity,rent,Prevention
-183011,,,Y,$500.00 ,AHTF, check ,1/20/2022,1/10/2022,549-HOPE (HRM),3 Rivers,Deposit,Literally Homeless
+183011,,,Y,$500.00 ,AHTF, check ,1/20/2022,1/10/2022,HRM,3 Rivers,Deposit,Literally Homeless
 177888,,,Y,$40.00 ,AHTF, check ,1/20/2022,1/13/2022,Pov,Garden City,application fees,Literally Homeless
 182645,,,Y,$600.00 ,AHTF, check ,1/20/2022,1/12/2022,YWCA,Professional PM,debt,Literally Homeless
 185611,,,Y,$650.00 ,OBT, check ,1/20/2022,1/19/2021,211,Deschamps Investments,rent,Prevention
 186774,,,Y,$618.00 ,OBT, cc ,1/14/2022,,211,Corso Apartments,rent,Prevention
-186184,,,Y,$475.00 ,AHTF, check ,1/10/2022,1/10/2022,549-HOPE (HRM),John Rice Properties,Lot Rent,Prevention
+186184,,,Y,$475.00 ,AHTF, check ,1/10/2022,1/10/2022,HRM,John Rice Properties,Lot Rent,Prevention
 164131,,,Y,$762.00 ,AHTF, check ,1/10/2022,1/6/2022,PHC,Missoula Manor,deposit/rent arrears,Prevention
 169508,,,Y,$618.00 ,AHTF,,1/5/2022,,211,Fidelity,rent,Prevention
 186538,,,Y,$600.00 ,AHTF, cc ,5-Jan,,211,UM Housing,rent,Prevention
@@ -357,7 +357,7 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 185503,,,Y,$475.86 ,WF, CC ,12/13/2021,,211,ADEA,deposit,Literally Homeless
 185586,,,Y,$600.00 ,WF, check ,12/10/2021,12/8/2021,Providence,Marjorie Butz,rent,Literally Homeless
 168904,,,Y,$191.99 ,WF, CC ,12/9/2021,,WMMHC,NW Energy,utility deposit,Literally Homeless
-185683,,,y,$618.00 ,WF,,12/9/2021,,549-HOPE (HRM),Fidelity,rent,Prevention
+185683,,,y,$618.00 ,WF,,12/9/2021,,HRM,Fidelity,rent,Prevention
 169599,,,Y,$518.78 ,WF, CC ,12/7/2021,,211,NW Energy,utility arrears,Literally Homeless
 185762,,,Y,$500.00 ,WF, CC ,12/3/2021,,211,Town Pump & Conoco,gas,Literally Homeless
 178704,,,Y,$500.00 ,WF, check ,12/1/2021,11/24/2021,MIC,Tamarack,pet deposit,Literally Homeless
@@ -370,7 +370,7 @@ R02YWCA,White,No,N,$935.75 ,AHTF,cc,4/12/2023,,YWCA,Northwestern Energy,utility 
 152338,,,N,$600.00 ,WF, CC ,11/17/2021,,211,Crosswinds,rent,Prevention
 185354,,,N,$600.00 ,WF, CC ,11/15/2021,,211,Crosswinds,rent,Prevention
 185283,,,Y,$600.00 ,WF, CC ,11/10/2021,,211,Crosswinds,rent,Prevention
-164108,,,Y,$650.00 ,WF, check ,11/10/2021,11/10/2021,WMMH/211,Dan Chilcote,rent,Prevention
+164108,,,Y,$650.00 ,WF, check ,11/10/2021,11/10/2021,WMMHC,Dan Chilcote,rent,Prevention
 165476,,,Y,$800.00 ,WF, check ,11/1/2021,11/1/2021,211,Summit,rental arrears,Prevention
 185101,,,Y,$609.00 ,WF, check ,11/1/2021,11/1/2021,WMMHC,Tamarack,rental arrears,Prevention
 177995,,,Y,$248.35 ,AHTF,,Missing,,Missing,,,Literally Homeless
