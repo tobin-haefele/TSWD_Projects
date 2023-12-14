@@ -274,7 +274,7 @@ ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.
   
 ```
 
-In this last section I want to focus on the agencies/programs that refer individuals to the Housing Solutions Fund. The main question I had is if there is a significant difference between the amount of money an individual gets based off of their referring entity. Using a simple regression model to see if there is any statistical significance between the Referral forms. 
+In this last section I want to focus on the agencies/programs that refer individuals to the Housing Solutions Fund. The main question I had is if there is a significant difference between the amount of money an individual gets based off of their referring entity. Using a simple regression model to see if there is any statistical significance between the Referral forms. Looking at the results from that model, we can see that there appears to be a significant decrease in the amount of funds when referred from BLANK and BLANK agencies. Due to the small sample size this could be an outlier and would need further evaluation to determine if this is a significant finding.
 
 ```{r Form Stat, echo=FALSE, results='hide', message=FALSE}
 #load data
@@ -353,9 +353,12 @@ ggplot(filtered_data, aes(x = Funding.Source, y = Referral.from, size = Total.pa
        size = "Total Paid",
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  )
 ```
 
 ### Comparing demographics of those who are receiving funding to the overall population of those who are unhoused
+Looking at the basic statistics we can see that on average over 84% of the funding is going to those who are white. 
+
 ```{r, echo=FALSE}
 #load data
 solutions_fund <- X20231122_solutions_fund
