@@ -282,3 +282,47 @@ race_freq_table <- filtered_data %>%
 race_freq_table
 
 knitr::kable(race_freq_table, format = "markdown")
+
+
+
+```{r, echo=FALSE}
+#analyzing the amount of money going to those new to missoula vs those who have been here for a while
+
+#load data
+solutions_fund <- X20231122_solutions_fund
+
+#convert to numeric
+solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
+
+#filter out rows where 6 mos in missoula is blank
+filtered_data <- solutions_fund %>%
+  filter(!is.na(X6.mos.in.Missoula...Y.N.) & X6.mos.in.Missoula...Y.N. != "")
+
+#combine rows where 6 mos in missoula is N or no
+filtered_data <- filtered_data %>%
+  mutate(X6.mos.in.Missoula...Y.N. = case_when(
+    X6.mos.in.Missoula...Y.N. %in% c("N", "No") ~ "N",
+    TRUE ~ "Y"
+  ))
+
+#GRoup average paid by 6 mos in Missoula Y/N
+average_paid_by_6_mos <- filtered_data %>%
+  group_by(X6.mos.in.Missoula...Y.N.) %>%
+  summarize(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
+  arrange(desc(AveragePaid))
+
+# Create a color scale based on the AveragePaid values
+color_scale <- scales::viridis_pal(option = "D")(length(unique(average_paid_by_6_mos$AveragePaid)))
+
+# Create the bar plot
+ggplot(average_paid_by_6_mos, aes(x = X6.mos.in.Missoula...Y.N., y = AveragePaid, fill = AveragePaid)) +
+  geom_bar(stat = "identity") +
+  scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)]) +
+  labs(title = "Average Spend by 6 mos in Missoula Y/N",
+       x = "6 mos in Missoula Y/N",
+       y = "Average Spend") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+#is the difference statistically significant?
+
+```

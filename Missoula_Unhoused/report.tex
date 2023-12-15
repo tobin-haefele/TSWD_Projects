@@ -1,0 +1,490 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Unhoused Funding Data Report},
+  pdfauthor={Tobin Haefele},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Unhoused Funding Data Report}
+\author{Tobin Haefele}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\subsection{Introduction}\label{introduction}
+
+In this report we partnered with the city of Missoula's ``Community
+Planning, Development, and Innovation'' (CPDI) department, specifically
+with the Community Development Division. In an effort to understand and
+monitor Missoula's unhoused population the CPDI department joined the
+Homeless Management Information System (HMIS) data collection effort by
+establishing a coordinated entry system. This allowed them to build
+datasets that can tell us much about the unhoused population. Along with
+this they have also executed a survey of the unhoused population to
+provide further data for us. Thanks to their hard work we have data to
+analyze and report on.
+
+\subsection{Executive summary}\label{executive-summary}
+
+This report presents an in-depth analysis of the CPDI department's data,
+yielding several key insights:
+
+Spending Distribution of funds was primaraly spent of prevention of
+homelessness rather than on those who are currently homeless. This is in
+line with the CPDI's goal of preventing homelessness before it happens.
+The majority of funds are going towards rent which aligns with the goal
+of preventing homelessness before it happens.
+
+The funding sources allocation found that the majority of funding is
+coming from three main sources, the AHTF (Affordable Housing Trust Fund
+(City)), WF (Wells Fargo). The AHTF had the highest average spend per
+individual at \$559, followed by WF (Wells Fargo) at \$529. The EFSG had
+the highest average spend per individual at \$762 but this could be
+contributed to the small sample size of 10 individuals.
+
+Finally our demographic analysis found that the majority of funding is
+going towards the White demographic at 84\%. This is in contrast to the
+general unhoused population within the MCES, where the percentage of
+White individuals is significantly lower at 67\%. Further exploration of
+this disparity highlights potential inequities in funding allocation
+across minority demographic groups.
+
+These findings offer valuable insights into the utilization and
+distribution of resources, underscoring the need for further exploration
+and potential adjustments to ensure more equitable access and targeted
+support for diverse demographic groups.
+
+\subsubsection{Analyzing the utilization of the housing solutions fund
+by prevention or currently
+homeless}\label{analyzing-the-utilization-of-the-housing-solutions-fund-by-prevention-or-currently-homeless}
+
+Our first analysis is how the housing solutions fund is being utilized
+to help the unhoused population. We will look at the total amounnt of
+money spent on prevention and the total amount spent on those who are
+currently homeless. Along with this we also want to look at what the
+funding is being used for and how much is being used in each category.
+
+Initial analysis of the housing solutions fund found that a total of
+\$193,628 was put towards either prevention or assistance to those
+currently unhoused. Of this total around 77\% of the funding is being
+used for prevention of homelessness compared to 23\% being allocated for
+those who are currently homeless. This disparity could be explained by
+the fact that it is much cheaper to prevent homelessness than it is to
+assist those who are currently homeless. This also aligns with the
+CPDI's goal of preventing homelessness before it happens.
+
+\begin{verbatim}
+## Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
+## of ggplot2 3.3.4.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics[width=0.8\linewidth]{report_files/figure-latex/unnamed-chunk-1-1}
+
+In this section I want to take a look at funding and how much is being
+spent on each category. This will allow us to view what the funding is
+being used for and how much is being spent on each category, allowing us
+to see if the funding is being used in the most optimal way.
+
+Within the Prevention group we can see that the over 70\% of funding is
+going towards rent while deposits make up around 14\%. The makeup of
+these categories make sense as preventing eviction or helping with
+deposits to secure a place to live is a great way to prevent
+homelessness.
+
+Among those currently homeless the majority of funding is going toward
+deposits (28\%) and transportation (23\%), both of these categories
+support the idea of helping those who are homeless either get into a
+home or get somewhere they have family/friends or a better opportunity.
+
+\begin{verbatim}
+## Warning in colnames(prevention_table)[1:3] <- new_column_names: number of items
+## to replace is not a multiple of replacement length
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in colnames(literally_homeless_table)[1:3] <- new_column_names: number
+## of items to replace is not a multiple of replacement length
+\end{verbatim}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4459}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2027}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1622}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1892}}@{}}
+\caption{Breakdown of Prevention Funding by Category}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Prevention or Literally Homeless
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Category
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Spent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+percent\_total
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Prevention or Literally Homeless
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Category
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Spent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+percent\_total
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Prevention & Rent & \$105,461 & 70.857\% \\
+Prevention & Deposits & \$21,335 & 14.335\% \\
+Prevention & Other & \$16,103 & 10.819\% \\
+Prevention & Utilities & \$5,266 & 3.538\% \\
+Prevention & Applications & \$372 & 0.250\% \\
+Prevention & Transportation & \$300 & 0.202\% \\
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4459}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2027}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1622}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1892}}@{}}
+\caption{Breakdown of Thoe Currently Homeless by
+Category}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Prevention or Literally Homeless
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Category
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Spent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+percent\_total
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Prevention or Literally Homeless
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Category
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Spent
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+percent\_total
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Literally Homeless & Deposits & \$12,931.58 & 28.87\% \\
+Literally Homeless & Transportation & \$10,322.75 & 23.05\% \\
+Literally Homeless & Other & \$7,815.72 & 17.45\% \\
+Literally Homeless & Utilities & \$6,185.57 & 13.81\% \\
+Literally Homeless & Rent & \$5,938.60 & 13.26\% \\
+Literally Homeless & Applications & \$1,597.39 & 3.57\% \\
+\end{longtable}
+
+\includegraphics[width=0.8\linewidth]{report_files/figure-latex/unnamed-chunk-2-1}
+
+\subsubsection{Evaluating the sources of funding and their impact on
+services
+provided}\label{evaluating-the-sources-of-funding-and-their-impact-on-services-provided}
+
+In this next section we will take a look at where this funding is coming
+in from and how much is coming from each source. Using this data we can
+identify which sources are being utilized the most and which are being
+utilized the least.
+
+Looking at the initial table we can see that just over half of the
+funding is coming from AHTF (Affordable Housing Trust Fund (City)) which
+is double the next closest source of funding OBT (Otto Bremer Trust) at
+22\%. Despite the EFSG (Emergency Solutions Grant (Human Resource
+Council program)) having a higher average spend on each individual at
+\$762 per individual, this could be contributed to having a very small
+sample size of 10 individuals. The highest average spend on each
+individual when accounting for sample size ends up being the AHTF and WF
+(Wells Fargo) sources, at \$559 and \$529 respectively.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2532}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1392}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2152}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3924}}@{}}
+\caption{Overall Breakdown of Where Funding is Coming
+From}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Funding Source
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Paid
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Percent of Total
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Number of Individuals Assisted
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Funding Source
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Paid
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Percent of Total
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Number of Individuals Assisted
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+AHTF & \$98,248.10 & 50.74\% & 170 \\
+EFSG & \$7,624.33 & 3.94\% & 10 \\
+Home Coalition & \$5,577.37 & 2.88\% & 16 \\
+Missoula Gives & \$1,455.00 & 0.75\% & 3 \\
+OBT & \$43,069.69 & 22.24\% & 88 \\
+Other sources/gifts & \$5,307.53 & 2.74\% & 17 \\
+Providence & \$8,965.55 & 4.63\% & 24 \\
+WF & \$23,381.03 & 12.08\% & 42 \\
+\end{longtable}
+
+\includegraphics[width=0.8\linewidth]{report_files/figure-latex/Source Evaluation-1}
+
+Taking a look at the categories in which the majority of funding goes
+for each source also sheds some insight into the goal for each source.
+Across the board rental assistance seems to be the biggest category for
+the majority of funding sources out there. Providence had the lowest
+amount ratio of funds going to rent at 33\%, private donations was the
+next lowest at 15\% and lastly Home Coalition was at 6\% before their
+dissolution. The fact that the rest of the funding sources had over half
+of their funding going to rent lends support to the goal of preventing
+homelessness before it happens. The largest donor AHTF spent almost 80\%
+of total donations on rent/deposits.
+
+\includegraphics[width=0.8\linewidth]{report_files/figure-latex/unnamed-chunk-3-1}
+
+In this last section I want to focus on the agencies/programs that refer
+individuals to the Housing Solutions Fund. It's apparent that HRM has
+the largest spread across each funding source, each of the major funding
+sources AHTF, OBT, and WF contributed to each of the top 5 referral
+forms. With more data I think it would be beneficiel to perform a basic
+analysis to see if there is a correlation between the amount of funding
+and the number of referrals from each agency/program. This could help us
+identify which agencies/programs are the most effective at referring
+individuals to the Housing Solutions Fund.
+
+\includegraphics[width=0.8\linewidth]{report_files/figure-latex/unnamed-chunk-4-1}
+
+\subsubsection{Comparing demographics of those who are receiving funding
+to the overall population of those who are
+unhoused}\label{comparing-demographics-of-those-who-are-receiving-funding-to-the-overall-population-of-those-who-are-unhoused}
+
+An examination of the statistics reveals a notable trend in funding
+distribution, with an average of 84\% allocated to individuals within
+the White demographic. This distribution is in contrast to the general
+unhoused population within the MCES, where the percentage of White
+individuals is significantly lower at 67\%. Further exploration of this
+disparity highlights potential inequities in funding allocation across
+different demographic groups.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3566}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1705}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0853}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2171}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1705}}@{}}
+\caption{Breakdown of Housing Solutions Fund Distribution by
+Race/Ethnicity}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Race/Ethnicity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Number of Individuals
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Paid
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Average Paid per Individual
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Percent of Total Paid
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Race/Ethnicity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Number of Individuals
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Paid
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Average Paid per Individual
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Percent of Total Paid
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+White & 139 & \$85,836.62 & \$617.53 & 84.3\% \\
+American Indian, Alaska Native, or Indigenous & 17 & \$10,743.93 &
+\$632.00 & 10.5\% \\
+Black, African American, or African & 5 & \$3,507.45 & \$701.49 &
+3.4\% \\
+Asian American/Pacific Islander & 2 & \$1,772.00 & \$886.00 & 1.7\% \\
+\end{longtable}
+
+Upon comparison, the demographic trends between individuals using the
+Housing Solutions Fund and the broader MCES population display similar
+distributions. However, a notable discrepancy emerges, particularly in
+the underrepresentation of Indigenous and Black individuals among users
+of the Housing Solutions Fund when contrasted with the demographic
+composition of the overall MCES population.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4792}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2292}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2917}}@{}}
+\caption{Breakdown of The Overall MCES Population by
+Race/Ethnicity}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Race/Ethnicity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Number of Individuals
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Percent of Total Population
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Race/Ethnicity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Number of Individuals
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Percent of Total Population
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+White & 3257 & 67.6\% \\
+American Indian, Alaska Native, or Indigenous & 639 & 13.3\% \\
+Multiple & 551 & 11.4\% \\
+Black, African American, or African & 241 & 5.0\% \\
+Asian American/Pacific Islander & 93 & 1.9\% \\
+Hispanic/Latina/e/o & 40 & 0.8\% \\
+\end{longtable}
+
+\subsubsection{Conclusion}\label{conclusion}
+
+\paragraph{Spending Distribution:}\label{spending-distribution}
+
+Prevention Focus: The majority of funds are directed toward preventing
+homelessness, predominantly through rent support. This aligns with
+CPDI's objective of preventing homelessness proactively.
+
+\paragraph{Funding Sources:}\label{funding-sources}
+
+Primary Sources: The major contributors to the fund are the Affordable
+Housing Trust Fund (AHTF), Wells Fargo (WF), and Emergency Food and
+Shelter Grant (EFSG). AHTF and WF show substantial average spending per
+individual, with EFSG displaying high average spending, albeit based on
+a smaller sample size.
+
+\paragraph{Demographic Analysis:}\label{demographic-analysis}
+
+Ethnic Disparities: While the funding primarily benefits the White
+demographic (84\%), it's notably higher than the 67\% representation of
+Whites in the general unhoused population within MCES. This disparity
+indicates potential inequities in fund allocation across minority
+groups.
+
+These insights highlight both the alignment of fund distribution with
+prevention goals and the need for further exploration of equity in
+funding distribution among various demographic groups within the
+unhoused population.
+
+\end{document}

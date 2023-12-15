@@ -2,9 +2,11 @@
 title: "Unhoused Funding Data Report"
 author: "Tobin Haefele"
 output:
-  html_document:
-    toc: yes
   word_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+  html_document:
     toc: yes
 ---
 ## Introduction
@@ -13,13 +15,15 @@ In this report we partnered with the city of Missoula's "Community Planning, Dev
 
 ## Executive summary
 
-The purpose of this report is to analyze the data provided by the CPDI department and provide a report on the findings. The report concluded with the following findings:
+This report presents an in-depth analysis of the CPDI department's data, yielding several key insights:
 
-* Total amount spent, prevention vs currently homeless
+  Spending Distribution of funds was primaraly spent of prevention of homelessness rather than on those who are currently homeless. This is in line with the CPDI's goal of preventing homelessness before it happens. The majority of funds are going towards rent which aligns with the goal of preventing homelessness before it happens.
 
-* Funding sources and distribution of funding
+  The funding sources allocation found that the majority of funding is coming from three main sources, the AHTF (Affordable Housing Trust Fund (City)), WF (Wells Fargo). The AHTF had the highest average spend per individual at $559, followed by WF (Wells Fargo) at $529. The EFSG had the highest average spend per individual at $762 but this could be contributed to the small sample size of 10 individuals.
 
-* Demographics
+  Finally our demographic analysis found that the majority of funding is going towards the White demographic at 84%. This is in contrast to the general unhoused population within the MCES, where the percentage of White individuals is significantly lower at 67%. Further exploration of this disparity highlights potential inequities in funding allocation across minority demographic groups.
+
+These findings offer valuable insights into the utilization and distribution of resources, underscoring the need for further exploration and potential adjustments to ensure more equitable access and targeted support for diverse demographic groups.
 
 ```{r setup, echo=FALSE} 
 knitr::opts_chunk$set(echo = FALSE)
@@ -51,7 +55,7 @@ Our first analysis is how the housing solutions fund is being utilized to help t
 
 Initial analysis of the housing solutions fund found that a total of $193,628 was put towards either prevention or assistance to those currently unhoused. Of this total around 77% of the funding is being used for prevention of homelessness compared to 23% being allocated for those who are currently homeless. This disparity could be explained by the fact that it is much cheaper to prevent homelessness than it is to assist those who are currently homeless. This also aligns with the CPDI's goal of preventing homelessness before it happens.
 
-```{r, echo=FALSE, results='hide'}
+```{r, echo=FALSE, results='hide', message=FALSE}
 
 #load data
 solutions_fund <- X20231122_solutions_fund
@@ -82,14 +86,13 @@ print(sum(summary_data$Total.paid))
 ggplot(summary_data, aes(x = Prevention.or.Literally.Homeless, y = Total.paid, fill = Prevention.or.Literally.Homeless)) +
   geom_bar(stat = "identity") +
   labs(title = "Majority of funding is spent on prevention of homelessness",
-       x = "Prevention or Literally Homeless",
+       x = "Prevention or Currently Homeless",
        y = "Total Paid") +
-  scale_fill_discrete(name = "Prevention or Literally Homeless",
+  scale_fill_discrete(name = "Prevention vs Currently Homeless",
                       labels = c("Prevention" = "Prevention",
-                                 "Literally Homeless" = "Literally Homeless"))
-
-
-
+                                 "Literally Homeless" = "Literally Homeless")) +
+  guides(fill = "none") +
+  theme(legend.position = "none")
 ```
 
 In this section I want to take a look at funding and how much is being spent on each category. This will allow us to view what the funding is being used for and how much is being spent on each category, allowing us to see if the funding is being used in the most optimal way.
@@ -156,14 +159,21 @@ prevention_table$percent_total <- scales::percent(prevention_table$percent_total
 literally_homeless_table$TotalSpent <- scales::dollar(literally_homeless_table$TotalSpent)
 literally_homeless_table$percent_total <- scales::percent(literally_homeless_table$percent_total / 100)
 
+# Rename columns in the tables
+new_column_names <- c("Prevention or Literally Homeless", "Category", "Total Spent", "Percent of Total")
+
+# Change column names in the tables
+colnames(prevention_table)[1:4] <- new_column_names
+colnames(literally_homeless_table)[1:4] <- new_column_names
+
 #knit the tables
-knitr::kable(prevention_table, format = "markdown")
-knitr::kable(literally_homeless_table, format = "markdown")
+knitr::kable(prevention_table, format = "markdown", caption = "Breakdown of Prevention Funding by Category")
+knitr::kable(literally_homeless_table, format = "markdown", caption = "Breakdown of Thoe Currently Homeless by Category")
 
 #plot
 ggplot(total_spent_by_group, aes(x = Prevention.or.Literally.Homeless, y = percent_total, fill = Category)) +
   geom_bar(stat = "identity") +
-  labs(title = "Where the funding is being spent for prevention vs those currently homeless",
+  labs(title = "Where Funding is Being Spent by Category for Prevention vs Currently Homeless",
        x = "Category",
        y = "Percent of Total") +
   scale_fill_discrete(name = "Type of Assistance") +
@@ -180,7 +190,6 @@ In this next section we will take a look at where this funding is coming in from
 Looking at the initial table we can see that just over half of the funding is coming from AHTF (Affordable Housing Trust Fund (City)) which is double the next closest source of funding OBT (Otto Bremer Trust) at 22%. Despite the EFSG (Emergency Solutions Grant (Human Resource Council program)) having a higher average spend on each individual at $762 per individual, this could be contributed to having a very small sample size of 10 individuals. The highest average spend on each individual when accounting for sample size ends up being the AHTF and WF (Wells Fargo) sources, at $559 and $529 respectively.
 
 ```{r Source Evaluation, echo=FALSE}
-
 # Load csv  file
 df <- X20231122_solutions_fund
 
@@ -226,16 +235,17 @@ combined_table$TotalPaid <- scales::dollar(combined_table$TotalPaid)
 combined_table$PercentTotal <- scales::percent(combined_table$PercentTotal / 100)
 
 #knit the table
-knitr::kable(combined_table, format = "markdown", caption = "Overall Breakdown of Where Funding is Coming From")
+knitr::kable(combined_table, format = "markdown", caption = "Overall Breakdown of Where Funding is Coming From", col.names = c("Funding Source", "Total Paid", "Percent of Total", "Number of Individuals Assisted"))
 
 # Create the bar plot
 ggplot(average_spend_per_HMIS_by_source, aes(x = `Funding.Source`, y = AveragePaidBySource, fill = AveragePaidBySource)) +
   geom_col() +
   scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)], guide = "none") +
-  labs(title = "Average amount paid per person by Funding Source",
+  labs(title = "Average Amount Spent on an Individual by Funding Source",
        x = "Funding Source",
-       y = "Average Spend ($)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+       y = "Average Spent ($)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$"))
 ```
 
 Taking a look at the categories in which the majority of funding goes for each source also sheds some insight into the goal for each source. Across the board rental assistance seems to be the biggest category for the majority of funding sources out there. Providence had the lowest amount ratio of funds going to rent at 33%, private donations was the next lowest at 15% and lastly Home Coalition was at 6% before their dissolution. The fact that the rest of the funding sources had over half of their funding going to rent lends support to the goal of preventing homelessness before it happens. The largest donor AHTF spent almost 80% of total donations on rent/deposits.
@@ -257,13 +267,12 @@ total_paid_by_what_for_by_source$Funding.Source <- factor(
   levels = unique(total_paid_by_what_for_by_source$Funding.Source[order(-total_paid_by_what_for_by_source$Total.paid)])
 )
 
-
 # Plot the stacked bar chart with filtered data
 ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.Total, fill = Category)) +
   geom_bar(stat = "identity", position = "fill") +
-  labs(title = "Percentage of funding spent on different categories by source",
+  labs(title = "Breakdown of Where Funding is Going for Each Source",
        x = "Funding Source",
-       y = "Percentage of Total") +
+       y = "Percentage of Total Funds from Source") +
   scale_fill_discrete(name = "What for",
                       labels = c("Prevention" = "Prevention",
                                  "Literally Homeless" = "Literally Homeless")) +
@@ -271,44 +280,9 @@ ggplot(total_paid_by_what_for_by_source, aes(x = Funding.Source, y = Percent.of.
             position = position_fill(vjust = 0.5)) +  
   theme_minimal() +
   scale_y_continuous(labels = scales::percent_format(scale = 100))
-  
 ```
 
-In this last section I want to focus on the agencies/programs that refer individuals to the Housing Solutions Fund. The main question I had is if there is a significant difference between the amount of money an individual gets based off of their referring entity. Using a simple regression model to see if there is any statistical significance between the Referral forms. Looking at the results from that model, we can see that there appears to be a significant decrease in the amount of funds when referred from BLANK and BLANK agencies. Due to the small sample size this could be an outlier and would need further evaluation to determine if this is a significant finding.
-
-```{r Form Stat, echo=FALSE, results='hide', message=FALSE}
-#load data
-solutions_fund <- X20231122_solutions_fund
-
-#convert to numeric
-solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
-
-#remove any spaces in the referral from column
-solutions_fund$Referral.from <- gsub(" ", "", solutions_fund$Referral.from)
-
-#convert all referral from to upper case
-solutions_fund$Referral.from <- toupper(solutions_fund$Referral.from)
-
-# Calculate the average paid for each Referral from
-average_paid_by_referral <- solutions_fund %>% 
-  group_by(Referral.from) %>%
-  summarize(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
-  arrange(desc(AveragePaid))
-
-print(average_paid_by_referral)
-
-#filter out rows where referral = MISSING
-filtered_data <- solutions_fund %>%
-  filter(Referral.from != "MISSING")
-
-#create a regression model
-model <- lm(Total.paid ~ Referral.from, data = filtered_data)
-
-#summary of model
-summary(model)
-
-```
-
+In this last section I want to focus on the agencies/programs that refer individuals to the Housing Solutions Fund. It's apparent that HRM has the largest spread across each funding source, each of the major funding sources AHTF, OBT, and WF contributed to each of the top 5 referral forms. With more data I think it would be beneficiel to perform a basic analysis to see if there is a correlation between the amount of funding and the number of referrals from each agency/program. This could help us identify which agencies/programs are the most effective at referring individuals to the Housing Solutions Fund.
 
 ```{r, echo=FALSE, results='hide', message=FALSE}
 ### Funding by source and referral from
@@ -326,7 +300,6 @@ solutions_fund$Referral.from <- gsub(" ", "", solutions_fund$Referral.from)
 
 #convert all referral from to upper case
 solutions_fund$Referral.from <- toupper(solutions_fund$Referral.from)
-unique(solutions_fund$Referral.from)
 
 # Calculate the total paid for each Referral from
 total_paid_by_referral <- solutions_fund %>%
@@ -347,18 +320,17 @@ filtered_data <- solutions_fund %>%
 ggplot(filtered_data, aes(x = Funding.Source, y = Referral.from, size = Total.paid, color = Referral.from)) +
   geom_point(alpha = 0.6) +
   scale_size(range = c(3, 15)) +
-  labs(title = "Top 5 Referral Forms by Funding Source and Total Paid",
+  labs(title = "Top 5 Agencies/Programs that Refer Individuals to the Housing Solutions Fund",
        x = "Funding Source",
-       y = "Referral from",
-       size = "Total Paid",
+       y = "Referring Entity/Program",
+       size = "Total Paid to Individual") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  )
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(color = "none")
 ```
 
 ### Comparing demographics of those who are receiving funding to the overall population of those who are unhoused
-Looking at the basic statistics we can see that on average over 84% of the funding is going to those who are white. 
-
+An examination of the statistics reveals a notable trend in funding distribution, with an average of 84% allocated to individuals within the White demographic. This distribution is in contrast to the general unhoused population within the MCES, where the percentage of White individuals is significantly lower at 67%. Further exploration of this disparity highlights potential inequities in funding allocation across different demographic groups.
 ```{r, echo=FALSE}
 #load data
 solutions_fund <- X20231122_solutions_fund
@@ -403,9 +375,15 @@ race_summary$TotalPaid <- scales::dollar(race_summary$TotalPaid)
 race_summary$AveragePaid <- scales::dollar(race_summary$AveragePaid)
 race_summary$PercentTotal <- scales::percent(race_summary$PercentTotal / 100)
 
-knitr::kable(race_summary, format = "markdown")
+knitr::kable(race_summary, 
+    format = "markdown", 
+    caption = "Breakdown of Housing Solutions Fund Distribution by Race/Ethnicity", 
+    col.names = c("Race/Ethnicity", "Number of Individuals", "Total Paid", "Average Paid per Individual", "Percent of Total Paid"))
+
 ```
-Demographics of the people receiving funding compared to the overall MCES population
+
+Upon comparison, the demographic trends between individuals using the Housing Solutions Fund and the broader MCES population display similar distributions. However, a notable discrepancy emerges, particularly in the underrepresentation of Indigenous and Black individuals among users of the Housing Solutions Fund when contrasted with the demographic composition of the overall MCES population.
+
 ```{r, echo=FALSE}
 ##import mces data to compare
 mces <- read.csv("C:/Users/thaef/OneDrive/Documents/GitHub/TSWD_Projects/Missoula_Unhoused/20231122-mces-data.csv")
@@ -438,51 +416,27 @@ race_freq_table <- filtered_data %>%
   ) %>%
   arrange(desc(Frequency))
 
-knitr::kable(race_freq_table, format = "markdown")
+#format columns for percentages
+race_freq_table$PercentTotal <- scales::percent(race_freq_table$PercentTotal / 100)
+
+knitr::kable(race_freq_table, 
+    format = "markdown", 
+    caption = "Breakdown of The Overall MCES Population by Race/Ethnicity", 
+    col.names =c( "Race/Ethnicity", "Number of Individuals", "Percent of Total Population"))
 ```
   
-```{r, echo=FALSE}
-#analyzing the amount of money going to those new to missoula vs those who have been here for a while
-
-#load data
-solutions_fund <- X20231122_solutions_fund
-
-#convert to numeric
-solutions_fund$Total.paid <- as.numeric(gsub("[\\$,]", "", solutions_fund$Total.paid))
-
-#filter out rows where 6 mos in missoula is blank
-filtered_data <- solutions_fund %>%
-  filter(!is.na(X6.mos.in.Missoula...Y.N.) & X6.mos.in.Missoula...Y.N. != "")
-
-#combine rows where 6 mos in missoula is N or no
-filtered_data <- filtered_data %>%
-  mutate(X6.mos.in.Missoula...Y.N. = case_when(
-    X6.mos.in.Missoula...Y.N. %in% c("N", "No") ~ "N",
-    TRUE ~ "Y"
-  ))
-
-#GRoup average paid by 6 mos in Missoula Y/N
-average_paid_by_6_mos <- filtered_data %>%
-  group_by(X6.mos.in.Missoula...Y.N.) %>%
-  summarize(AveragePaid = mean(Total.paid, na.rm = TRUE)) %>%
-  arrange(desc(AveragePaid))
-
-# Create a color scale based on the AveragePaid values
-color_scale <- scales::viridis_pal(option = "D")(length(unique(average_paid_by_6_mos$AveragePaid)))
-
-# Create the bar plot
-ggplot(average_paid_by_6_mos, aes(x = X6.mos.in.Missoula...Y.N., y = AveragePaid, fill = AveragePaid)) +
-  geom_bar(stat = "identity") +
-  scale_fill_gradient(low = color_scale[1], high = color_scale[length(color_scale)]) +
-  labs(title = "Average Spend by 6 mos in Missoula Y/N",
-       x = "6 mos in Missoula Y/N",
-       y = "Average Spend") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-#is the difference statistically significant?
-
-```
-
 ### Conclusion
 
-insert conclusion
+#### Spending Distribution:
+
+  Prevention Focus: The majority of funds are directed toward preventing homelessness, predominantly through rent support. This aligns with CPDI's objective of preventing homelessness proactively.
+
+#### Funding Sources:
+
+  Primary Sources: The major contributors to the fund are the Affordable Housing Trust Fund (AHTF), Wells Fargo (WF), and Emergency Food and Shelter Grant (EFSG). AHTF and WF show substantial average spending per individual, with EFSG displaying high average spending, albeit based on a smaller sample size.
+
+#### Demographic Analysis:
+
+  Ethnic Disparities: While the funding primarily benefits the White demographic (84%), it's notably higher than the 67% representation of Whites in the general unhoused population within MCES. This disparity could indicate potential inequities in fund allocation across minority groups. With more data we would be able to create a regression model to analyze if this difference is statistically significant.
+
+These insights highlight both the alignment of fund distribution with prevention goals and the need for further exploration of equity in funding distribution among various demographic groups within the unhoused population.
